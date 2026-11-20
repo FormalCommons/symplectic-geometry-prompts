@@ -29,7 +29,8 @@ Then make progress on the issue in one of these ways:
   work builds and passes the checks that `AGENTS.md` describes, commit,
   check it against the points below, push, and open a pull request with
   `gh pr create`, ready for review, not as a draft. Its description says
-  what it does and why, and ends with `Closes #{{.Number}}`.
+  what it does and why, names the sources it follows, and ends with
+  `Closes #{{.Number}}`.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
   clear goal and a way to tell when it is done. Make each part a sub-issue

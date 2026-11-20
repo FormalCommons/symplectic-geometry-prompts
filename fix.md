@@ -39,6 +39,18 @@ you disagree with a review comment, do not change the code for it; answer
 it and say why. If part of the fix belongs in a separate change, create an
 issue for it with `gh issue create --label proposed`.
 
+If a review says the pull request cannot be fixed as it stands, because a
+prerequisite must come first or its material does not belong to its issue,
+and you agree: mark the issue the review names for the prerequisite as
+blocking the issue this pull request closes, say so in a comment, and close
+the pull request with `gh pr close {{.Number}}`. Its issue then waits for
+the prerequisite, and comes back to an agent after it. To mark issue B as
+blocking issue A:
+
+```
+gh api -X POST repos/{{.Repo}}/issues/A/dependencies/blocked_by -F issue_id="$(gh api repos/{{.Repo}}/issues/B --jq .id)"
+```
+
 Before you push, review the whole pull request, not only your fix, as its
 reviewer will: read its committed changes (`git diff origin/main...`, or
 against whichever branch it targets) and check each of these, fixing what
@@ -52,7 +64,8 @@ changed and answers the review.
 Rules:
 
 - Work only on pull request #{{.Number}}. Do not change other issues or
-  pull requests, except the issues you create.
+  pull requests, except the issues you create and, as above, the blocker of
+  the issue this pull request closes.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop
