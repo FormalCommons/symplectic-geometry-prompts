@@ -36,8 +36,9 @@ are adapted from the rubrics of
 `DESIGN.md` and the issues instead of Tau Ceti's roadmaps, reuse searches
 Tau Ceti as well as Mathlib, and the atlas's text must stay out of the
 public repository. A blocking finding becomes a request for changes; when a
-prerequisite must come first, the reviewer opens an issue for it and the fix
-job closes the pull request until it is done.
+prerequisite must come first, the reviewer opens an issue for it, and the
+fix job marks it as the issue's blocker and closes the pull request, so that
+a new work job takes the issue up once the prerequisite is done.
 
 ## Changing a prompt
 

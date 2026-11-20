@@ -39,22 +39,35 @@ you disagree with a review comment, do not change the code for it; answer
 it and say why. If part of the fix belongs in a separate change, create an
 issue for it with `gh issue create --label proposed`.
 
-If a review says the pull request cannot be fixed as it stands, because a
-prerequisite must come first or its material does not belong to its issue,
-and you agree: mark the issue the review names for the prerequisite as
-blocking the issue this pull request closes, say so in a comment, and close
-the pull request with `gh pr close {{.Number}}`. Its issue then waits for
-the prerequisite, and comes back to an agent after it. To mark issue B as
-blocking issue A:
+A fix that changes only the pull request's description, its title or a
+reply makes no new commit, and the review stays as it was. So after
+editing the description (`gh pr edit {{.Number}} --body …`), push an empty
+commit (`git commit --allow-empty -m "…"`) to ask for a new review.
+
+Material that a review says does not belong to the issue: remove it from
+the pull request, and create an issue for it if the review has not.
+
+If a review says the pull request cannot be fixed as it stands, and you
+agree:
+
+- **A prerequisite must come first.** If the review names no issue for it,
+  create one with `gh issue create --label proposed`. Mark that issue as
+  blocking the issue this pull request closes, say so in a comment, and
+  close the pull request with `gh pr close {{.Number}}`. Its issue then
+  waits for the prerequisite, and comes back to an agent after it.
+- **The pull request as a whole does not do its issue.** Say so in a
+  comment, and close it. The issue comes back to an agent, who reads this
+  pull request's reviews.
+
+To mark issue B as blocking issue A:
 
 ```
 gh api -X POST repos/{{.Repo}}/issues/A/dependencies/blocked_by -F issue_id="$(gh api repos/{{.Repo}}/issues/B --jq .id)"
 ```
 
-Before you push, review the whole pull request, not only your fix, as its
-reviewer will: read its committed changes (`git diff origin/main...`, or
-against whichever branch it targets) and check each of these, fixing what
-falls short.
+Before you push, review your fix as the reviewer will: read what it
+changes (`git diff` against the pull request's head before your fix), and
+check each of these for it, fixing what falls short.
 
 {{template "_checks.md" .}}
 
@@ -64,8 +77,8 @@ changed and answers the review.
 Rules:
 
 - Work only on pull request #{{.Number}}. Do not change other issues or
-  pull requests, except the issues you create and, as above, the blocker of
-  the issue this pull request closes.
+  pull requests, except the issues you create and, as above, the blockers
+  of the issue this pull request closes.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop
