@@ -65,7 +65,8 @@ The atlas is private and this repository public, so nothing the pull request
 adds may copy the atlas's text: not the code, docstrings, comments, the
 description or an `ERRATA.md` entry. A milestone's name is the only text of
 the atlas that may appear. Mathematics stated in Lean, and explanations in
-the author's own words, are not copies. To check, take runs of about eight
+the author's own words, are not copies; nor are a milestone's name, a Lean
+declaration's name or a formula that the atlas also has. To check, take runs of about eight
 consecutive words from the pull request's prose, in plain words with
 formulas left out, and search all of `/atlas` for them (`grep -rF`); read
 closely any passage that follows the atlas sentence by sentence. Report a
