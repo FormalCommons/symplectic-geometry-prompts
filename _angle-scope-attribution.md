@@ -13,7 +13,9 @@ parts' designs under `design/`. A pull request does its issue: its
 description ends with `Closes #…`, or with `Part of #…` if it only adds an
 unresolved entry to `ERRATA.md`. An open issue without the `proposed` label
 has been accepted; do not judge whether it should exist. If you doubt that
-it should, say so in your summary as work for an issue of its own.
+it should, say so in your summary as work for an issue of its own. A pull
+request that a person in the project opened needs no issue, and may change
+the setup files.
 
 - **New material serves the issue.** Every new definition, theorem or file is
   something the issue asks for, or a prerequisite it needs. The API that

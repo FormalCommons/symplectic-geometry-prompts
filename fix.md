@@ -39,10 +39,12 @@ you disagree with a review comment, do not change the code for it; answer
 it and say why. If part of the fix belongs in a separate change, create an
 issue for it with `gh issue create --label proposed`.
 
-A fix that changes only the pull request's description, its title or a
-reply makes no new commit, and the review stays as it was. So after
-editing the description (`gh pr edit {{.Number}} --body …`), push an empty
-commit (`git commit --allow-empty -m "…"`) to ask for a new review.
+A fix that changes only the pull request's description or its title, or
+that answers a finding only by a reply, makes no new commit, and the review
+stays as it was. So after such a fix, push an empty commit
+(`git commit --allow-empty -m "…"`) to ask for a new review. If the
+reviewer keeps a finding after your reply to it, do not push again for it:
+a person decides.
 
 Material that a review says does not belong to the issue: remove it from
 the pull request, and create an issue for it if the review has not.
@@ -77,8 +79,8 @@ changed and answers the review.
 Rules:
 
 - Work only on pull request #{{.Number}}. Do not change other issues or
-  pull requests, except the issues you create and, as above, the blockers
-  of the issue this pull request closes.
+  pull requests, except the issues you create and, as above, the issue this
+  pull request closes, whose blockers you may add.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop

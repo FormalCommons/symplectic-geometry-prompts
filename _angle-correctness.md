@@ -55,8 +55,8 @@ not commit, under `/tmp`, run with `lake env lean`: only `propext`,
 
 A pull request that adds or changes an entry in `ERRATA.md` is yours: check
 that the error is real, that each change to a statement has a counterexample,
-and, for an entry marked **Unresolved**, that its evidence holds and its
-routes were really tried. A pull request that only adds an unresolved entry,
+that the file has no entry for that error yet, and, for an entry marked
+**Unresolved**, that its evidence holds and its routes were really tried. A pull request that only adds an unresolved entry,
 and is `Part of` its issue, need not do the issue.
 
 ### Missing prerequisites
@@ -69,9 +69,11 @@ that it must come first as its own work.
 
 ### Verdict
 
-- `block` on a mis-formalized, vacuous or placeholder statement, a faked
-  prerequisite that does not fit in the pull request, or an entry in
-  `ERRATA.md` whose error is not real. When blocking on doubt, name the
+- `block` on a mis-formalized, vacuous or placeholder statement; content
+  moved into hypotheses; a milestone weaker than or different from the
+  atlas's with no record of the error as `AGENTS.md` asks; a faked
+  prerequisite that does not fit in the pull request; or an entry in
+  `ERRATA.md` whose error is not real or is already recorded. When blocking on doubt, name the
   statement, the suspected mismatch, and the check or source that failed to
   settle it.
 - `request changes` for a missing convention in a docstring, a predicate

@@ -25,18 +25,17 @@ repeat work that is done or under way.
 
 Then make progress on the issue in one of these ways:
 
-- **Do it.** Work on a branch named `fc/issue-{{.Number}}`, or, if a
-  closed pull request already used that name, `fc/issue-{{.Number}}-2`,
-  `-3` and so on. If an earlier pull request for this issue was closed,
-  read its reviews first (`gh pr list --state closed --search "#{{.Number}}"`,
-  then `gh pr view <number> --comments`), so as not to repeat what they
-  found. Make sure the work builds and passes the checks that `AGENTS.md`
-  describes, commit,
-  check it against the points below, push, and open a pull request with
-  `gh pr create`, ready for review, not as a draft. Its description says
-  what it does and why, names the sources it follows, and ends with
-  `Closes #{{.Number}}`. Never copy the atlas's text into it, or into a
-  commit message: this repository is public.
+- **Do it.** Work on a branch named `fc/issue-{{.Number}}`, or, if a closed
+  pull request already used that name, `fc/issue-{{.Number}}-2`, `-3` and so
+  on. If an earlier pull request for this issue was closed, read its reviews
+  first (`gh pr list --state closed --head fc/issue-{{.Number}}`, and the
+  same for `-2` and so on, then `gh pr view <number> --comments`), so as not
+  to repeat what they found. Make sure the work builds and passes the checks
+  that `AGENTS.md` describes, commit, check it against the points below,
+  push, and open a pull request with `gh pr create`, ready for review, not
+  as a draft. Its description says what it does and why, names the sources
+  it follows, and ends with `Closes #{{.Number}}`. Never copy the atlas's
+  text into it, or into a commit message: this repository is public.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
   clear goal and a way to tell when it is done. Make each part a sub-issue

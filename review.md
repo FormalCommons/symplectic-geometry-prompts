@@ -14,14 +14,8 @@ is part of, and its changes (`gh pr diff {{.Number}}`).
 ## Build
 
 Build it as `AGENTS.md` says (`lake exe cache get`, then
-`lake build --wfail`). Then check that it still works with the latest base
-branch, which may have moved since the pull request began: `git fetch
-origin`, merge the base branch into your checkout (`git merge origin/main`,
-or whichever branch the pull request targets), and build again. Do not push
-the merge. If it conflicts, or the merged code fails, that is a finding:
-request changes and say what breaks. Then return the checkout to the pull
-request's head (`git merge --abort`, or `git reset --hard` to the head) and
-review that, so that one round reports everything.
+`lake build --wfail`). The subagents check statements against this build of
+the pull request's head.
 
 ## Four angles
 
@@ -55,6 +49,15 @@ show is wrong, merge findings that several angles report, and settle findings
 that conflict by the rules of `AGENTS.md`. If a subagent fails or returns
 nothing, judge its angle yourself: never approve without all four.
 
+## The base branch
+
+Last, check that it still works with the latest base branch, which may have
+moved since the pull request began, or while you reviewed: `git fetch
+origin`, merge the base branch into your checkout (`git merge origin/main`,
+or whichever branch the pull request targets), and build again. Do not push
+the merge. If it conflicts, or the merged code fails, that is a finding:
+request changes and say what breaks.
+
 Then decide what to do with each finding and suggestion. Nobody acts on a
 suggestion in an approved review, so:
 
@@ -82,10 +85,18 @@ Then submit exactly one review:
   first or the pull request as a whole does not do its issue, say so, and
   name the issue you created for the prerequisite.
 
+Either way, end the review with a line "Notes:" for what the subagents put
+in their summaries for the maintainer, such as open pull requests with the
+same material, if there is any. If a subagent found the atlas's text in a
+commit message, which is public and cannot be fixed by a new commit, also
+label the pull request `needs-human` (`gh pr edit {{.Number}} --add-label
+needs-human`) and say why in the review: a person decides what to do.
+
 Rules:
 
 - You review; you do not change the pull request or push, and you do not
-  change other issues or pull requests, except the issues you create.
+  change other issues or pull requests, except the issues you create, and
+  the `needs-human` label above.
 - Never quote the atlas, in the review, an issue or a comment: this
   repository is public. Cite the file and line under `/atlas`, and the
   milestone's name.

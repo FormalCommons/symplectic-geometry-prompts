@@ -20,7 +20,7 @@ a finding.
 ### Searches to run
 
 Choose search terms and grep to verify. On a later round, search only what
-changed since the last review.
+changed since the last review, as the protocol defines it.
 
 - For each new declaration, an existing one with the same content. It may
   have another name than you expect, or match up to renaming, unfolding,
