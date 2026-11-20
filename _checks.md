@@ -72,4 +72,7 @@ EOF
 ```
 
 Each line it prints gives a file, the line where a run starts, and the run
-of words that the atlas also has.
+of words that the atlas also has. A commit already pushed cannot be
+reworded without force-pushing: leave it, and say in your comment that its
+message needs a maintainer, without quoting it. Check an issue or comment
+you create the same way, by saving its text to a file and passing it too.
