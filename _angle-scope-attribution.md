@@ -63,16 +63,16 @@ the setup files.
 
 The atlas is private and this repository public, so nothing the pull request
 adds may copy the atlas's text: not the code, docstrings, comments, the
-description or an `ERRATA.md` entry. A milestone's name is the only text of
-the atlas that may appear. Mathematics stated in Lean, and explanations in
-the author's own words, are not copies. To check, take runs of about eight
-consecutive words from the pull request's prose, in plain words with
-formulas left out, and search all of `/atlas` for them (`grep -rF`); read
-closely any passage that follows the atlas sentence by sentence. Report a
-copy by file and line on both sides, without quoting it. Commit messages
-cannot be changed without rewriting history, and the merge uses the pull
-request's title and description, so a copy there is a note for the
-maintainer in your summary, not a finding.
+description or an `ERRATA.md` entry. Mathematics stated in Lean,
+explanations in the author's own words, a milestone's name, a Lean
+declaration's name, a formula and a citation of a published source are not
+copies. To check, take runs of about eight consecutive words from the pull
+request's prose, in plain words with formulas left out, and search all of
+`/atlas` for them (`grep -rF`); read closely any passage that follows the
+atlas sentence by sentence. Report a copy by file and line on both sides,
+without quoting it. Commit messages cannot be changed without rewriting
+history, and the merge uses the pull request's title and description, so a
+copy there is a note for the maintainer in your summary, not a finding.
 
 ### Verdict
 

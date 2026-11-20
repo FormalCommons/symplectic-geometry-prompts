@@ -17,10 +17,14 @@
   ends with its `Closes #…` line (`Part of #…` for a pull request that only
   adds an unresolved entry to `ERRATA.md`).
 - **Credited, and no atlas text.** The module docstrings name the published
-  sources the work follows. Nothing copies the atlas's text, in code,
-  comments, the description or commit messages; a milestone's name is the
-  only text of it that may appear. Write what you post in your own words
-  from the start: a posted description is public at once.
+  sources the work follows. No prose copies the atlas's text: not in code,
+  comments, the description or commit messages. A milestone's name, a Lean
+  declaration's name, a formula and a citation of a published source are
+  not copies. Write what you post in your own words from the start: a
+  posted description is public at once. Run the atlas check below before
+  you push or post, and reword each passage it finds that follows the
+  atlas. Never quote what it prints, in a comment, a commit message or the
+  description.
 - **Good library code.** A minimal public surface with the API that
   characterizes each definition (`foo_def`, `mem_foo_iff`, `@[ext]`,
   `@[simp]`); statements at their natural generality and in their natural
@@ -32,3 +36,43 @@
   the branch was made: `git fetch origin`, merge the base branch
   (`git merge origin/main`, or whichever branch the pull request targets),
   and build and test again.
+
+The atlas check searches `/atlas` for every run of eight words, ignoring
+case and punctuation, in the files the branch changes, its commit messages
+and the description. Save the description you will post as
+`/tmp/description.md` (in a fix job, the pull request's current one, from
+`gh pr view <number> --json body -q .body`, with your changes), and post
+that file (`gh pr create --body-file /tmp/description.md`, or
+`gh pr edit <number> --body-file /tmp/description.md`). Then run:
+
+```
+git log --format=%B origin/main..HEAD > /tmp/commits.txt
+node - $(git diff --name-only --diff-filter=d origin/main...) /tmp/commits.txt /tmp/description.md <<'EOF'
+const fs = require("fs"), path = require("path");
+const words = t => t.toLowerCase().match(/[a-z]+/g) || [];
+const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e =>
+  e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
+const atlas = new Set();
+for (const f of walk("/atlas").filter(f => /\.(md|bib|tex)$/.test(f))) {
+  const w = words(fs.readFileSync(f, "utf8"));
+  for (let i = 0; i + 8 <= w.length; i++) atlas.add(w.slice(i, i + 8).join(" "));
+}
+for (const p of process.argv.slice(2)) {
+  const w = [], line = [];
+  fs.readFileSync(p, "utf8").split("\n").forEach((l, n) =>
+    words(l).forEach(x => { w.push(x); line.push(n + 1); }));
+  for (let i = 0; i + 8 <= w.length; ) {
+    let j = i;
+    while (j + 8 <= w.length && atlas.has(w.slice(j, j + 8).join(" "))) j++;
+    if (j > i) { console.log(`${p}:${line[i]}: ${w.slice(i, j + 7).join(" ")}`); i = j; }
+    else i++;
+  }
+}
+EOF
+```
+
+Each line it prints gives a file, the line where a run starts, and the run
+of words that the atlas also has. A commit already pushed cannot be
+reworded without force-pushing: leave it, and say in your comment that its
+message needs a maintainer, without quoting it. Check an issue or comment
+you create the same way, by saving its text to a file and passing it too.
