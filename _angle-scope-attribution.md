@@ -27,7 +27,9 @@ the setup files.
   the part's design. A departure needs a reason in the description, and a
   change to the design in the same pull request or an issue that proposes
   one. A lemma added beyond those the design names is not a departure: do
-  not ask that the design list it.
+  not ask that the design list it. A file added, or an import of another
+  part's file, that the part's design file records needs no entry in
+  `DESIGN.md`: do not ask for one.
 - **Refactors are in scope** when their issue asks for one: reworking merged
   material needs no new claim. A refactor that its issue does not ask for,
   bundled with new work, is a second topic.

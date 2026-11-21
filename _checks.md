@@ -33,11 +33,18 @@
   imports a file of another part, or gives a name, a statement or an
   attribute that differs from the design's, the design says so as the pull
   request leaves it. Record it in this pull request: in the part's design
-  file, or in the part's section of `DESIGN.md` if it has no file, and in
-  `DESIGN.md` where it has the same list. Find every place: grep
-  `DESIGN.md` and `design/` for a neighbouring file's name, or for the old
-  name. Change only the lines that name what changed, write no more than
-  the code shows, and give the reason in the description. A lemma you add
+  file, or in the part's section of `DESIGN.md` if it has no file. A file
+  you add, or an import of another part's file, goes in that one file
+  only: grep it for a neighbouring file's name to find the places. Where
+  the part has a design file, do not add it to `DESIGN.md`, whose lists of
+  a part's files and of what a part uses need not be complete: every
+  part's pull requests change `DESIGN.md`, and a conflict there costs a
+  fix and a second review. If such an addition of yours conflicts in
+  `DESIGN.md`, keep the base branch's lines and drop yours. A moved file,
+  or a changed name, statement or attribute, is corrected wherever
+  `DESIGN.md` or `design/` gives the old one: grep for it. Change only the
+  lines that name what changed, write no more than the code shows, and
+  give the reason in the description. A lemma you add
   beyond those the design names needs no entry: do not add it to the
   design's file table or to its list of that file's declarations. Other
   open pull requests change those lines, and a conflict there costs a fix
