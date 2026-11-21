@@ -32,26 +32,28 @@
 - **The design matches.** Where the pull request adds or moves a file,
   imports a file of another part, or gives a name, a statement or an
   attribute that differs from the design's, the design says so as the pull
-  request leaves it. Record it in this pull request: in the part's design
-  file, or in the part's section of `DESIGN.md` if it has no file. A file
-  you add, or an import of another part's file, goes in that one file
-  only: grep it for a neighbouring file's name to find the places. Where
-  the part has a design file, do not add it to `DESIGN.md`, whose lists of
-  a part's files and of what a part uses need not be complete: every
-  part's pull requests change `DESIGN.md`, and a conflict there costs a
-  fix and a second review. If such an addition of yours conflicts in
-  `DESIGN.md`, keep the base branch's lines and drop yours. A moved file,
-  or a changed name, statement or attribute, is corrected wherever
-  `DESIGN.md` or `design/` gives the old one: grep for it. Change only the
-  lines that name what changed, write no more than the code shows, and
-  give the reason in the description. A lemma you add
-  beyond those the design names needs no entry: do not add it to the
-  design's file table or to its list of that file's declarations. Other
-  open pull requests change those lines, and a conflict there costs a fix
-  and a second review. If it makes a sentence of the design false, such as
-  a count, correct that sentence only. Where the design is wrong in more
-  than that, such as a definition, a milestone or the build order, do as
-  `AGENTS.md` says: propose the change in an issue.
+  request leaves it. Record it in this pull request. If the part has no
+  design file, record it in `DESIGN.md`, wherever it gives that list. If
+  it has one, a Lean file you add, or an import of another part's file, is
+  recorded under `design/` and not in `DESIGN.md`: grep `design/` for a
+  neighbouring file's name to find the places. `DESIGN.md`'s lists of a
+  part's files and of what it imports may then fall behind, its "imports
+  only" notes included: every part's pull requests change `DESIGN.md`, and
+  a conflict there costs a fix and a second review. If the pull request
+  already has such additions in `DESIGN.md` and it conflicts there, take
+  all of them out, not only the lines in conflict, and keep the base
+  branch's text. A moved file or declaration, or a changed name, statement
+  or attribute, is corrected wherever `DESIGN.md` or `design/` gives the
+  old one: grep for it. Change only the lines that name what changed,
+  write no more than the code shows, and give the reason in the
+  description. A lemma you add beyond those the design names needs no
+  entry: do not add it to the design's file table or to its list of that
+  file's declarations. Other open pull requests change those lines, and a
+  conflict there costs a fix and a second review. If it makes a sentence
+  of the design false, such as a count, correct that sentence only. Where
+  the design is wrong in more than that, such as a definition, a milestone
+  or the build order, do as `AGENTS.md` says: propose the change in an
+  issue.
 - **Blockers that match the design.** Agents do not change other issues'
   blockers, so they stay as they were set. If the work changes which parts
   or issues build on which (the build order in `DESIGN.md`, a part's
