@@ -74,6 +74,33 @@ the pull request and list them all.
   in a public review. Cite the file and line under `/atlas`, and the
   milestone's name.
 
+### Designs
+
+A pull request that changes `DESIGN.md` or files under `design/`, and
+nothing else but `ERRATA.md`, is a design: a plan whose details later steps
+settle. A part's design file refines the overview, and the building
+issues and their pull requests refine a part's design. On a design, this
+section takes the place of the angles' lists where they differ, and a
+finding is only for what a later step could not put right:
+
+- a milestone missing, or stated differently from the atlas or
+  `ERRATA.md`;
+- parts or issues that cannot be built in the order given;
+- a mathematical claim or route that is wrong, or a cited declaration that
+  does not exist or cannot give what the plan needs;
+- a definition or structure that duplicates what Mathlib, Tau Ceti or the
+  library has;
+- a departure from `DESIGN.md` or a merged design that gives no reason, or
+  that neither changes that design nor has an issue that proposes the
+  change;
+- a change to the build order with no issue for the blockers it moves.
+
+A choice that a later step can still make, or make better, such as a name,
+a namespace, a file, the generality of a statement, the API a definition
+needs, the size of its issues, or which existing lemma to use, is a note
+for that step: say which part or issue it concerns, and do not request
+changes for it.
+
 ### Earlier rounds
 
 On a pull request that has been reviewed before, the earlier findings are
