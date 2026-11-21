@@ -71,7 +71,10 @@ gh api -X POST repos/{{.Repo}}/issues/A/dependencies/blocked_by -F issue_id="$(g
 
 Before you push, review your fix as the reviewer will: read what it
 changes (`git diff` against the pull request's head before your fix), and
-check each of these for it, fixing what falls short.
+check each of these for it, fixing what falls short. A second request for
+changes is most often about what the fix itself added: a moved lemma's new
+file, its docstring, its attributes, its imports, or the design's record
+of it. Check that as closely as new work.
 
 {{template "_checks.md" .}}
 
