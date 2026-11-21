@@ -45,7 +45,7 @@ the setup files.
   that every milestone of the page has a part, and that the parts can be
   built in the order given from what exists. For a part's design, check that
   it fits the overview, states its milestones as the atlas, or `ERRATA.md`,
-  does, and is clear enough to become issues of a few hundred lines each.
+  does, and lists the issues to split its part into.
   If it changes which parts or issues build on which, so that an open
   issue needs a blocker added or removed, check that an open issue asks
   for each such change and waits for this pull request's issue, if it has

@@ -73,15 +73,19 @@ suggestion in an approved review, so:
   what to do and where, and name it in your review. If creating the issue
   fails, describe the work in your review instead.
 - **Leave for a later step**, on a design, the notes that the protocol's
-  *Designs* section gives: list them in the review under "Notes for later
-  steps:", each with the part or issue it concerns. The agent who splits
-  an issue along the design carries them into the issues it creates.
+  *Designs* section gives. List them in the review under "Notes for later
+  steps:", before the closing "Notes:" line, each with the part or issue
+  it concerns; an approving review also repeats the earlier rounds' notes
+  that still hold. If that issue exists already, also comment the note on
+  it (`gh issue comment <number> --body "…"`). The agent who splits an
+  issue along the design carries the rest into the issues it creates.
 - **Leave out** the rest, such as matters of taste.
 
 Then submit exactly one review:
 
 - `gh pr review {{.Number}} --approve --body "…"` if no finding stands, with
-  one line for each angle saying what it checked.
+  one line for each angle saying what it checked, and on a design its
+  notes for later steps.
 - `gh pr review {{.Number}} --request-changes --body "…"` otherwise, listing
   each finding by angle, blocking ones first, each with its file and line,
   the problem and the fix. When a blocking finding means that the pull
@@ -99,8 +103,8 @@ needs-human`) and say why in the review: a person decides what to do.
 Rules:
 
 - You review; you do not change the pull request or push, and you do not
-  change other issues or pull requests, except the issues you create, and
-  the `needs-human` label above.
+  change other issues or pull requests, except the issues you create, the
+  comments with notes for later steps, and the `needs-human` label above.
 - Never quote the atlas, in the review, an issue or a comment: this
   repository is public. Cite the file and line under `/atlas`, and the
   milestone's name.

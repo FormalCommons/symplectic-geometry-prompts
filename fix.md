@@ -31,7 +31,8 @@ Find out what is wrong:
   base branch and fix what breaks.
 
 Read the issue the pull request closes or is part of, so that the fix
-still does what the issue asks.
+still does what the issue asks. A review's "Notes for later steps:" are
+for later issues, not for this pull request: do not change it for them.
 
 Fix it on the same branch: commit and push, without force-pushing. Make
 sure the work builds and passes the checks that `AGENTS.md` describes. If

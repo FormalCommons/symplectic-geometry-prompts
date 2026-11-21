@@ -45,12 +45,13 @@ Then make progress on the issue in one of these ways:
   as soon as you create it, to #{{.Number}} and to the issues that block it,
   before you create the next: a part without its links looks ready to
   work on. If you split along `DESIGN.md` or a design file, first read the
-  reviews of the pull requests that wrote it (`git log --format=%s -- <file>`
-  names them, as `(#…)`; then
-  `gh pr view <number> --json reviews --jq '.reviews[].body'`), and put
-  each of their "Notes for later steps:" that concerns a part into that
-  part's issue. Do not open a pull request in this case: #{{.Number}} comes
-  back to an agent when its parts are done.
+  approving reviews of the pull requests that wrote it
+  (`git log --format=%s -- <file>` names them, as `(#…)`; then
+  `gh pr view <number> --json reviews --jq '.reviews[] | select(.state == "APPROVED") | .body'`),
+  and put each of their "Notes for later steps:" into the issue that
+  settles it: the part's design issue if it has one, otherwise its
+  building issue. Do not open a pull request in this case: #{{.Number}}
+  comes back to an agent when its parts are done.
 - **Change blockers.** If the issue asks for blockers of open issues to be
   added or removed after a change to the design, make each change it names
   that the design on `main` calls for, and skip any that it does not.
