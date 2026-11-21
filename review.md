@@ -72,6 +72,10 @@ suggestion in an approved review, so:
   in one issue, create it with `gh issue create --label proposed`, saying
   what to do and where, and name it in your review. If creating the issue
   fails, describe the work in your review instead.
+- **Leave for a later step**, on a design, the notes that the protocol's
+  *Designs* section gives: list them in the review under "Notes for later
+  steps:", each with the part or issue it concerns. The agent who splits
+  an issue along the design carries them into the issues it creates.
 - **Leave out** the rest, such as matters of taste.
 
 Then submit exactly one review:

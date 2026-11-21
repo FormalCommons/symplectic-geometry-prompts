@@ -74,6 +74,21 @@ the pull request and list them all.
   in a public review. Cite the file and line under `/atlas`, and the
   milestone's name.
 
+### Designs
+
+A pull request that adds or changes `DESIGN.md` or a file under `design/`
+is a plan, and later steps settle its details: a part's design file refines
+the overview, and the building issues and their pull requests refine a
+part's design. So on a design, a finding is only for what a later step
+could not put right: a milestone missing, or stated otherwise than the
+atlas or `ERRATA.md` states it; parts or issues that cannot be built in the
+order given; a mathematical claim, a route or a cited declaration that is
+wrong; or a structure that redefines what Mathlib, Tau Ceti or the library
+has. A choice that a later step can still make, or make better, such as a
+name, a namespace, a file, the generality of a statement, the API a
+definition needs, or which existing lemma to use, is a note for that step:
+say which part or issue it concerns, and do not request changes for it.
+
 ### Earlier rounds
 
 On a pull request that has been reviewed before, the earlier findings are
