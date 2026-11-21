@@ -35,7 +35,8 @@ Then make progress on the issue in one of these ways:
   push, and open a pull request with `gh pr create`, ready for review, not
   as a draft. Its description says what it does and why, names the sources
   it follows, and ends with `Closes #{{.Number}}`. Never copy the atlas's
-  text into it, or into a commit message: this repository is public.
+  text into it, or into a commit message: this repository is public. Once
+  it is open, create any issue that the points below ask for then.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
   clear goal and a way to tell when it is done. Make each part a sub-issue
@@ -50,8 +51,9 @@ Then make progress on the issue in one of these ways:
   that the design on `main` calls for, and skip any that it does not.
   Remove a blocker only where the design shows that the issue no longer
   builds on it, and keep blockers that a prerequisite, a design issue or a
-  split added. Open no pull request: comment with each change you made and
-  the line of the design behind it, and label the issue `close-proposed`.
+  split added. Open no pull request: comment with each change you made,
+  and each you skipped and why, with the line of the design behind it, and
+  label the issue `close-proposed`.
 - **Propose closing it.** If the issue needs no change, because it is done
   already, a duplicate or mistaken, comment why and label it
   `close-proposed`. Do not close it yourself. Give the evidence, so that
