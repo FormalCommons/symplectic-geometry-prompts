@@ -37,9 +37,12 @@
   `DESIGN.md` where it has the same list. Find every place: grep
   `DESIGN.md` and `design/` for a neighbouring file's name, or for the old
   name. Change only the lines that name what changed, write no more than
-  the code shows, and give the reason in the description. Where the design
-  is wrong in more than that, such as a definition, a milestone or the
-  build order, do as `AGENTS.md` says: propose the change in an issue.
+  the code shows, and give the reason in the description. A lemma that the
+  design does not name is not a departure and needs no entry: do not add it
+  to a file's row or list of declarations, which other open pull requests
+  edit too, so that each such edit is a merge conflict for them. Where the
+  design is wrong in more than that, such as a definition, a milestone or
+  the build order, do as `AGENTS.md` says: propose the change in an issue.
 - **Blockers that match the design.** Agents do not change other issues'
   blockers, so they stay as they were set. If the work changes which parts
   or issues build on which (the build order in `DESIGN.md`, a part's
