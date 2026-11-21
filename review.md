@@ -63,6 +63,10 @@ suggestion in an approved review, so:
 
 - **Request changes** for what this pull request must change before it is
   merged: every finding that stands, whether `block` or `request changes`.
+  When the fix you give adds or moves a file, or changes a name, a
+  statement or an attribute that the design gives, say in the same finding
+  that the design must record it in this pull request, so that the fix
+  does not bring a finding of its own.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere

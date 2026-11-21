@@ -10,12 +10,28 @@
 - **Not a duplicate.** You searched Mathlib, Tau Ceti and this library for
   each new declaration and for the steps of each long proof, including the
   declarations that the atlas page's correspondence list names, and the
-  open pull requests. No thin wrapper restates what exists.
+  open pull requests. No thin wrapper restates what exists. Search again
+  on the finished diff, Tau Ceti as hard as Mathlib, since most duplicates
+  that reviews find are steps proved inline: for each new lemma, `private`
+  ones included, and each `have` that takes more than a few lines and
+  would hold outside its proof, grep the three source trees for the
+  identifiers of its statement, and try `exact?` on it in a scratch file
+  under `/tmp` (`lake env lean /tmp/….lean`).
 - **In scope.** It does what its issue asks and nothing unrelated, as one
   topic, as the design says, with the API its new definitions need. The
   description says what it does and why, names the sources it follows, and
   ends with its `Closes #…` line (`Part of #…` for a pull request that only
-  adds an unresolved entry to `ERRATA.md`).
+  adds an unresolved entry to `ERRATA.md`). The description claims only
+  what the diff does: each declaration it names is there, and is used
+  where it says. If the issue says how to tell that it is done, that test
+  passes on the branch merged with the base branch.
+- **The design matches.** Each file the pull request adds or moves, and
+  each name, statement or attribute that the design gives and the pull
+  request changes, is in the design as the pull request leaves it. For a
+  small record, such as a new file's row or a moved attribute, change the
+  part's design file in this pull request, and `DESIGN.md` only where it
+  lists what changed, and give the reason in the description. Where the
+  design itself is wrong, do as `AGENTS.md` says.
 - **Blockers that match the design.** Agents do not change other issues'
   blockers, so they stay as they were set. If the work changes which parts
   or issues build on which (the build order in `DESIGN.md`, a part's
@@ -26,20 +42,41 @@
   blocked by the issue the pull request closes as soon as you create it,
   so that it waits for the merge.
 - **Credited, and no atlas text.** The module docstrings name the published
-  sources the work follows. No prose copies the atlas's text: not in code,
-  comments, the description or commit messages. A milestone's name, a Lean
-  declaration's name, a formula and a citation of a published source are
-  not copies. Write what you post in your own words from the start: a
-  posted description is public at once. Run the atlas check below before
-  you push or post, and reword each passage it finds that follows the
-  atlas. Never quote what it prints, in a comment, a commit message or the
-  description.
+  sources the work follows. A proof that adapts one from Tau Ceti or
+  Mathlib, with the same steps in another setting, is credited in the
+  module docstring by the name of the declaration it adapts; the
+  description alone is not enough. No prose copies the atlas's text: not
+  in code, comments, the description or commit messages. A milestone's
+  name, a Lean declaration's name, a formula and a citation of a published
+  source are not copies. Write what you post in your own words from the
+  start: a posted description is public at once. Run the atlas check
+  below before you push or post, and reword each passage it finds that
+  follows the atlas. Never quote what it prints, in a comment, a commit
+  message or the description.
 - **Good library code.** A minimal public surface with the API that
   characterizes each definition (`foo_def`, `mem_foo_iff`, `@[ext]`,
   `@[simp]`); statements at their natural generality and in their natural
   files, as `AGENTS.md` and `DESIGN.md` say; Mathlib-style names in the
   right namespace; docstrings about the mathematics; robust proofs, with
-  long ones split into lemmas.
+  long ones split into lemmas. Reviews most often find the following, so
+  check each on the finished diff:
+  - a `private` lemma that is not a step of one proof. One whose statement
+    mentions only Mathlib or Tau Ceti types and whose proof uses nothing
+    of this file's subject, or one that several proofs use, is public, in
+    the file and namespace of its subject;
+  - a docstring that says more than its statement, or the reverse of it.
+    Read each docstring you wrote, or whose declaration you changed,
+    against the statement: the direction of a map or an implication, the
+    hypotheses, and each thing it says the conclusion gives;
+  - `@[simp]` on a lemma that `simp` already proves, or whose left side
+    `simp` rewrites. In a scratch file under `/tmp` that imports the files
+    you changed, `#lint only simpNF in SymplecticGeometry` reports none of
+    your lemmas;
+  - a `rfl`, `change` or `show` that works only by unfolding a definition
+    through a wrapper or a coercion. Use the lemma, or add it; a `change`
+    or `show` that stays has a comment saying why it is needed;
+  - an import that the file does not use, and a step proved twice in one
+    file.
 - **It answers earlier reviews**, if there are any.
 - **It still works with the latest base branch**, which may have moved since
   the branch was made: `git fetch origin`, merge the base branch

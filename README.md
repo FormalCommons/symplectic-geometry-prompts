@@ -13,7 +13,7 @@ restart.
 | `fix.md` | A pull request that needs a fix. |
 | `review.md` | A pull request that needs a review. |
 | `triage.md` | An issue labelled `proposed` or `close-proposed`. |
-| `_checks.md` | The reviewer's angles in short, which work and fix jobs check before they push. |
+| `_checks.md` | The reviewer's angles in short, with checks for what first reviews most often find, which work and fix jobs go through before they push. |
 | `_review-protocol.md` | The protocol every reviewer follows: untrusted input, an adversarial author, what to report. |
 | `_angle-*.md` | The review's four angles, each judged by its own subagent: correctness, reuse, scope and attribution, library quality. |
 
