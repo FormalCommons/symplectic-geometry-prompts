@@ -67,9 +67,12 @@ suggestion in an approved review, so:
   part's file, or changes a name, a statement or an attribute that the
   design gives, say in the same finding that the design must record it in
   this pull request, and in which places, so that the fix does not bring a
-  finding of its own. A lemma that the pull request or your fix adds beyond
-  those the design names needs no record: do not ask for one, unless it
-  makes a sentence of the design false.
+  finding of its own. For a Lean file added or an import of another part's
+  file, the place is the part's design file, where it has one, and not
+  `DESIGN.md`: do not ask for a record there, even where one of its lists
+  or "imports only" notes falls behind. A lemma that the pull request or
+  your fix adds beyond those the design names needs no record: do not ask
+  for one, unless it makes a sentence of the design false.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere
