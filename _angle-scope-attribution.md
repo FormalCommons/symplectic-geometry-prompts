@@ -46,6 +46,10 @@ the setup files.
   built in the order given from what exists. For a part's design, check that
   it fits the overview, states its milestones as the atlas, or `ERRATA.md`,
   does, and is clear enough to become issues of a few hundred lines each.
+  If it changes which parts or issues build on which, so that an open
+  issue needs a blocker added or removed, check that an open issue asks
+  for each such change and waits for this pull request's issue, if it has
+  one.
 
 ### Attribution
 
@@ -85,7 +89,8 @@ copy there is a note for the maintainer in your summary, not a finding.
   it does and why, names no sources, or lacks its `Closes #…` or
   `Part of #…` line; a departure from the design without a reason; a size
   limit exceeded; a setup change outside a move or a person's issue; a
-  design that misses a milestone or cannot be built in its order; or a
+  design that misses a milestone or cannot be built in its order; a change
+  to the build order with no issue to bring the blockers in line; or a
   central source named in the description but not in the code, or followed
   but not named.
 - Approve when the pull request does its issue, as one unit, fits the

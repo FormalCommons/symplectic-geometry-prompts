@@ -9,7 +9,7 @@ restart.
 
 | File | Job |
 |---|---|
-| `work.md` | An issue that is ready: do it, split it, or propose closing it. |
+| `work.md` | An issue that is ready: do it, split it, change the blockers it names, or propose closing it. |
 | `fix.md` | A pull request that needs a fix. |
 | `review.md` | A pull request that needs a review. |
 | `triage.md` | An issue labelled `proposed` or `close-proposed`. |

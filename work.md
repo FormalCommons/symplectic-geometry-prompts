@@ -35,7 +35,8 @@ Then make progress on the issue in one of these ways:
   push, and open a pull request with `gh pr create`, ready for review, not
   as a draft. Its description says what it does and why, names the sources
   it follows, and ends with `Closes #{{.Number}}`. Never copy the atlas's
-  text into it, or into a commit message: this repository is public.
+  text into it, or into a commit message: this repository is public. Once
+  it is open, create any issue that the points below ask for then.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
   clear goal and a way to tell when it is done. Make each part a sub-issue
@@ -45,6 +46,14 @@ Then make progress on the issue in one of these ways:
   before you create the next: a part without its links looks ready to
   work on. Do not open a pull request in this case: #{{.Number}} comes back
   to an agent when its parts are done.
+- **Change blockers.** If the issue asks for blockers of open issues to be
+  added or removed after a change to the design, make each change it names
+  that the design on `main` calls for, and skip any that it does not.
+  Remove a blocker only where the design shows that the issue no longer
+  builds on it, and keep blockers that a prerequisite, a design issue or a
+  split added. Open no pull request: comment with each change you made,
+  and each you skipped and why, with the line of the design behind it, and
+  label the issue `close-proposed`.
 - **Propose closing it.** If the issue needs no change, because it is done
   already, a duplicate or mistaken, comment why and label it
   `close-proposed`. Do not close it yourself. Give the evidence, so that
@@ -75,10 +84,17 @@ To mark issue B as blocking issue A:
 gh api -X POST repos/{{.Repo}}/issues/A/dependencies/blocked_by -F issue_id="$(gh api repos/{{.Repo}}/issues/B --jq .id)"
 ```
 
+To remove issue B from the blockers of issue A:
+
+```
+gh api -X DELETE repos/{{.Repo}}/issues/A/dependencies/blocked_by/"$(gh api repos/{{.Repo}}/issues/B --jq .id)"
+```
+
 Rules:
 
 - Work only on issue #{{.Number}}. Do not change other issues or pull
-  requests, except the issues you create.
+  requests, except the issues you create, and blockers as **Change
+  blockers** says.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop

@@ -22,7 +22,9 @@ Look through the open and closed issues and pull requests
 
 If the issue is labelled `proposed`, an agent created it. Decide whether it
 is needed, whether it repeats another issue, and whether it is clear enough
-to work on: a goal, and a way to tell when it is done.
+to work on: a goal, and a way to tell when it is done. An issue that asks
+for changes once an open pull request merges is needed if they would be
+needed after that merge.
 
 - If it is all three, edit it if it needs it (`gh issue edit`), comment in
   a line or two what you checked, and remove the label:
