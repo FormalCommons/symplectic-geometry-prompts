@@ -76,9 +76,9 @@ the pull request and list them all.
 
 ### Designs
 
-A pull request that changes only `DESIGN.md`, files under `design/` or
-`ERRATA.md`, and no Lean file, is a design: a plan whose details later
-steps settle. A part's design file refines the overview, and the building
+A pull request that changes `DESIGN.md` or files under `design/`, and
+nothing else but `ERRATA.md`, is a design: a plan whose details later steps
+settle. A part's design file refines the overview, and the building
 issues and their pull requests refine a part's design. On a design, this
 section takes the place of the angles' lists where they differ, and a
 finding is only for what a later step could not put right:
@@ -90,8 +90,9 @@ finding is only for what a later step could not put right:
   does not exist or cannot give what the plan needs;
 - a definition or structure that duplicates what Mathlib, Tau Ceti or the
   library has;
-- a departure from `DESIGN.md` or a merged design with no reason, and no
-  issue that proposes it;
+- a departure from `DESIGN.md` or a merged design that gives no reason, or
+  that neither changes that design nor has an issue that proposes the
+  change;
 - a change to the build order with no issue for the blockers it moves.
 
 A choice that a later step can still make, or make better, such as a name,

@@ -40,15 +40,15 @@ prerequisite must come first, the reviewer opens an issue for it, and the
 fix job marks it as the issue's blocker and closes the pull request, so that
 a new work job takes the issue up once the prerequisite is done.
 
-A design, a pull request that changes no Lean file, is reviewed for what
+A design, a pull request that changes only the design, is reviewed for what
 later steps could not put right: the milestones, the build order, the
 mathematics, reuse of what exists, and fit with the merged design.
 Choices that a part's design file or a building issue can still make are
-notes for later steps, not requests for changes: the reviewer comments
-them on the issue they concern, or the split along the design carries
-them into the issues it creates, and fix jobs leave them alone. In the
-first run, the overview design took seven rounds, and each part design
-took three to seven.
+notes for later steps, not requests for changes: the approving review
+comments them on the open issue they concern, or the split along the
+design carries them into the issues it creates, and fix jobs leave them
+alone. In the first run, the overview design took seven rounds, and each
+part design took three to seven.
 
 ## Changing a prompt
 

@@ -76,9 +76,10 @@ suggestion in an approved review, so:
   *Designs* section gives. List them in the review under "Notes for later
   steps:", before the closing "Notes:" line, each with the part or issue
   it concerns; an approving review also repeats the earlier rounds' notes
-  that still hold. If that issue exists already, also comment the note on
-  it (`gh issue comment <number> --body "…"`). The agent who splits an
-  issue along the design carries the rest into the issues it creates.
+  that still hold. When you approve, also comment each note on its issue
+  if that issue is open (`gh issue comment <number> --body "…"`). The
+  agent who splits an issue along the design carries the rest into the
+  issues it creates.
 - **Leave out** the rest, such as matters of taste.
 
 Then submit exactly one review:

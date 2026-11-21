@@ -48,9 +48,9 @@ Then make progress on the issue in one of these ways:
   approving reviews of the pull requests that wrote it
   (`git log --format=%s -- <file>` names them, as `(#…)`; then
   `gh pr view <number> --json reviews --jq '.reviews[] | select(.state == "APPROVED") | .body'`),
-  and put each of their "Notes for later steps:" into the issue that
-  settles it: the part's design issue if it has one, otherwise its
-  building issue. Do not open a pull request in this case: #{{.Number}}
+  and put each of their "Notes for later steps:" into the issue you create
+  for what it concerns: for a part that gets a design issue, that design
+  issue. Do not open a pull request in this case: #{{.Number}}
   comes back to an agent when its parts are done.
 - **Change blockers.** If the issue asks for blockers of open issues to be
   added or removed after a change to the design, make each change it names
