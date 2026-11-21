@@ -75,10 +75,20 @@ To mark issue B as blocking issue A:
 gh api -X POST repos/{{.Repo}}/issues/A/dependencies/blocked_by -F issue_id="$(gh api repos/{{.Repo}}/issues/B --jq .id)"
 ```
 
+To remove issue B from the blockers of issue A:
+
+```
+gh api -X DELETE repos/{{.Repo}}/issues/A/dependencies/blocked_by/"$(gh api repos/{{.Repo}}/issues/B --jq .id)"
+```
+
 Rules:
 
 - Work only on issue #{{.Number}}. Do not change other issues or pull
-  requests, except the issues you create.
+  requests, except the issues you create, and the blockers of open issues
+  when #{{.Number}} asks for that. Then make the changes it asks for, and
+  any others that the same change to the design needs, each as the design
+  on `main` says. They need no pull request: once they are made, propose
+  closing #{{.Number}}, listing them.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop

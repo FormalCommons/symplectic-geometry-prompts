@@ -16,6 +16,14 @@
   description says what it does and why, names the sources it follows, and
   ends with its `Closes #…` line (`Part of #…` for a pull request that only
   adds an unresolved entry to `ERRATA.md`).
+- **Blockers that match the design.** Open issues keep the blockers they
+  were created with. If the work changes which parts or issues build on
+  which (the build order in `DESIGN.md`, a part's *Builds on*, the order of
+  a design file's issues), so that an open issue needs a blocker added or
+  removed, create an issue, labelled `proposed`, that names each such
+  change, unless an open issue already asks for it. Mark the new issue as
+  blocked by the issue this pull request closes, so that it waits for the
+  merge.
 - **Credited, and no atlas text.** The module docstrings name the published
   sources the work follows. No prose copies the atlas's text: not in code,
   comments, the description or commit messages. A milestone's name, a Lean
