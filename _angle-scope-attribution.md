@@ -48,7 +48,8 @@ the setup files.
   does, and is clear enough to become issues of a few hundred lines each.
   If it changes which parts or issues build on which, so that an open
   issue needs a blocker added or removed, check that an open issue asks
-  for each such change and waits for this pull request's issue.
+  for each such change and waits for this pull request's issue, if it has
+  one.
 
 ### Attribution
 

@@ -45,6 +45,13 @@ Then make progress on the issue in one of these ways:
   before you create the next: a part without its links looks ready to
   work on. Do not open a pull request in this case: #{{.Number}} comes back
   to an agent when its parts are done.
+- **Change blockers.** If the issue asks for blockers of open issues to be
+  added or removed after a change to the design, make each change it names
+  that the design on `main` calls for, and skip any that it does not.
+  Remove a blocker only where the design shows that the issue no longer
+  builds on it, and keep blockers that a prerequisite, a design issue or a
+  split added. Open no pull request: comment with each change you made and
+  the line of the design behind it, and label the issue `close-proposed`.
 - **Propose closing it.** If the issue needs no change, because it is done
   already, a duplicate or mistaken, comment why and label it
   `close-proposed`. Do not close it yourself. Give the evidence, so that
@@ -84,11 +91,8 @@ gh api -X DELETE repos/{{.Repo}}/issues/A/dependencies/blocked_by/"$(gh api repo
 Rules:
 
 - Work only on issue #{{.Number}}. Do not change other issues or pull
-  requests, except the issues you create, and the blockers of open issues
-  when #{{.Number}} asks for that. Then make the changes it asks for, and
-  any others that the same change to the design needs, each as the design
-  on `main` says. They need no pull request: once they are made, propose
-  closing #{{.Number}}, listing them.
+  requests, except the issues you create, and blockers as **Change
+  blockers** says.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop

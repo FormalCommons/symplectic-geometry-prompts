@@ -39,8 +39,9 @@ you disagree with a review comment, do not change the code for it; answer
 it and say why. If part of the fix belongs in a separate change, create an
 issue for it with `gh issue create --label proposed`.
 
-A fix that changes only the pull request's description or its title, or
-that answers a finding only by a reply, makes no new commit, and the review
+A fix that changes only the pull request's description or its title, that
+only creates an issue, or that answers a finding only by a reply, makes no
+new commit, and the review
 stays as it was. So after such a fix, push an empty commit
 (`git commit --allow-empty -m "…"`) to ask for a new review. If the
 reviewer keeps a finding after your reply to it, do not push again for it:
