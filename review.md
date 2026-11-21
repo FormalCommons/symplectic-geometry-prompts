@@ -67,7 +67,9 @@ suggestion in an approved review, so:
   part's file, or changes a name, a statement or an attribute that the
   design gives, say in the same finding that the design must record it in
   this pull request, and in which places, so that the fix does not bring a
-  finding of its own.
+  finding of its own. A lemma that the pull request or your fix adds beyond
+  those the design names needs no record: do not ask for one, unless it
+  makes a sentence of the design false.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere
