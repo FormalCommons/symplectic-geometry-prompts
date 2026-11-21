@@ -59,11 +59,13 @@ the setup files.
   copies or closely adapts, such as a Mathlib or Tau Ceti pull request.
 - Watch for laundering: following an identifiable source's order of results,
   notation or proof plan is enough to need credit, even with no text copied.
-- Do not rely on the description to name what was adapted. Where the design
-  or a docstring names a Tau Ceti or Mathlib counterpart of a new definition
-  or main theorem, or the reuse search finds one, open it and compare the
-  proofs: the same construction and the same steps in another setting need
-  credit in the module docstring, by the name of the declaration adapted.
+- Do not rely on the description to name what was adapted. For each new
+  definition and main theorem, grep Tau Ceti and Mathlib (under
+  `.lake/packages`, as `AGENTS.md` says) for the distinctive identifiers
+  of its body and proof, and open what the design or a docstring names as
+  its counterpart. The same construction and the same steps in another
+  setting need credit in the module docstring, by the name of the
+  declaration adapted; using a lemma is not adapting it.
 - Do not ask for credit for routine work that follows nothing in particular.
   The atlas itself is not credited in Lean files: a milestone's docstring
   line, "Milestone: *…*", is the only place a Lean file mentions it.
