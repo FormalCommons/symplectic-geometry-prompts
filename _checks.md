@@ -29,39 +29,35 @@
   what the diff does: each declaration it names is there, and is used
   where it says. If the issue says how to tell that it is done, that test
   passes on the branch merged with the base branch.
-- **The design matches.** Where the pull request adds or moves a file,
-  imports a file of another part, or gives a name, a statement or an
-  attribute that differs from the design's, the design says so as the pull
-  request leaves it. Record it in this pull request. If the part has no
-  design file, record it in `DESIGN.md`, wherever it gives that list. If
-  it has one, a Lean file you add, or an import of another part's file, is
-  recorded under `design/` and not in `DESIGN.md`: grep `design/` for a
-  neighbouring file's name to find the places. In a table or a list of
-  files there, give the new file a row or a line of its own, and leave
-  the others as they are: do not reorder or re-wrap them. If the list is
-  in the order of the paths, the new file goes at its place in that
-  order; if not, next to the file it serves rather than at the end. Do not
-  write how many files there are; if a sentence counts the files of that
-  list ("the nine files outside that folder"), take the number out instead
-  of raising it. Pull requests that each add at the end, or each change
-  the number, conflict with one another. `DESIGN.md`'s lists of a part's
-  files and of what it imports may fall behind, its "imports only" notes
-  included: every part's pull requests change `DESIGN.md`, and a conflict
-  there costs a fix and a second review. If the pull request
-  already has such additions in `DESIGN.md` and it conflicts there, take
-  all of them out, not only the lines in conflict, and keep the base
-  branch's text. A moved file or declaration, or a changed name, statement
-  or attribute, is corrected wherever `DESIGN.md` or `design/` gives the
-  old one: grep for it. Change only the lines that name what changed,
-  write no more than the code shows, and give the reason in the
-  description. A lemma you add beyond those the design names needs no
-  entry: do not add it to the design's file table or to its list of that
-  file's declarations. Other open pull requests change those lines, and a
-  conflict there costs a fix and a second review. If it makes a sentence
-  of the design false, such as a count of lemmas, correct that sentence
-  only. Where the design is wrong in more than that, such as a definition,
-  a milestone or the build order, do as `AGENTS.md` says: propose the
-  change in an issue.
+- **The design matches.** The design is the plan, not a list of what the
+  library has. A Lean file, an import or a lemma that you add beyond those
+  the design names needs no entry in `DESIGN.md` or under `design/`, so add
+  none, even where the issue, an earlier review or the design itself asks
+  for that record: no row in a table of files, no line in a list of
+  imports, no sentence under an issue or a file. A file of its own for a
+  step of a planned file gets none either; only where the design names a
+  declaration of that step, correct the file it gives for it, as below.
+  The file's module docstring says what it is for. The other open pull
+  requests of the part would write theirs at the same place, and a
+  conflict there costs a fix and a second review. The design's lists of a
+  part's files and of what it imports may fall behind, "used by" and
+  "imports only" notes included: leave them. What the design does say
+  stays true: where the pull request moves or renames a file or a
+  declaration that the design names, first writes one at another path or
+  under another name, or gives one a statement or an attribute that
+  differs from the design's, correct it wherever `DESIGN.md` or `design/`
+  gives the old one: grep for it. Change
+  only the lines that name what changed, write no more than the code
+  shows, and give the reason in the description. If the pull request makes
+  any other sentence of the design false, such as a count of files or
+  lemmas, or the lemma a step says it uses, correct that sentence only,
+  and for a count take the number out instead of raising it. If the pull
+  request already has entries for files, imports or lemmas that the design
+  did not name, and it conflicts there, take all of them out, not only the
+  lines in conflict, keep the base branch's text, and take what the
+  description says of them out too. Where the design is wrong in more than
+  that, such as a definition, a milestone or the build order, do as
+  `AGENTS.md` says: propose the change in an issue.
 - **Blockers that match the design.** Agents do not change other issues'
   blockers, so they stay as they were set. If the work changes which parts
   or issues build on which (the build order in `DESIGN.md`, a part's

@@ -40,6 +40,12 @@ prerequisite must come first, the reviewer opens an issue for it, and the
 fix job marks it as the issue's blocker and closes the pull request, so that
 a new work job takes the issue up once the prerequisite is done.
 
+When the author has only merged the base branch since an approval, as a
+fix for a conflict does, the review job does not start the four subagents
+again: it checks how each merge resolved its conflicts and that the merged
+code builds. What the base branch brought in that the pull request could
+now use becomes an issue and not a request for changes.
+
 A design, a pull request that changes only the design, is reviewed for what
 later steps could not put right: the milestones, the build order, the
 mathematics, reuse of what exists, and fit with the merged design.

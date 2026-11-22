@@ -39,9 +39,11 @@ Then make progress on the issue in one of these ways:
   it is open, create any issue that the points below ask for then.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
-  clear goal and a way to tell when it is done. Make each part a sub-issue
-  of #{{.Number}}, or mark it as blocking #{{.Number}}. Create the parts in
-  an order where each part's blockers come before it, and link each part
+  clear goal and a way to tell when it is done. Do not ask in an issue
+  that its pull request record in the design a Lean file, an import or a
+  lemma that it adds. Make each part a sub-issue of #{{.Number}}, or mark
+  it as blocking #{{.Number}}. Create the parts in an order where each
+  part's blockers come before it, and link each part
   as soon as you create it, to #{{.Number}} and to the issues that block it,
   before you create the next: a part without its links looks ready to
   work on. If you split along `DESIGN.md` or a design file, first read the

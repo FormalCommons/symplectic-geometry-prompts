@@ -17,6 +17,66 @@ Build it as `AGENTS.md` says (`lake exe cache get`, then
 `lake build --wfail`). The subagents check statements against this build of
 the pull request's head.
 
+## After an approval, only a merge of the base branch
+
+Look at the latest review by `formalcommons-reviewer[bot]`, the account
+that review jobs post as; a review by anyone else does not count here. If
+it approved (its state is `APPROVED`, or `DISMISSED` with a body that
+approves, since a push dismisses an approval), take the commit it reviewed
+(`commit_id`), `<reviewed>` below, and check all three:
+
+- `git merge-base --is-ancestor <reviewed> HEAD` succeeds;
+- `git log --first-parent --no-merges <reviewed>..HEAD` lists nothing: the
+  author has made no commit of their own since;
+- `git log --first-parent --merges <reviewed>..HEAD` lists at least one
+  merge, and each merged the base branch:
+  `git merge-base --is-ancestor <merge>^2 origin/main` succeeds.
+
+If all three hold, the author has only merged the base branch since the
+approval, because the pull request conflicted with it or left the merge
+queue. The work was approved from all four angles and does not need them
+again: do this section yourself, with no subagents, in place of *Four
+angles*. In every other case, or if a command of this section gives an
+error, skip this section and do *Four angles*.
+
+- Read what each merge changed by hand. `git show --remerge-diff <merge>`
+  merges the two sides again and prints how the commit differs from that:
+  each conflict, with its markers, and how the author resolved it, a side
+  that was dropped included; each change outside a conflict; and nothing
+  for a merge that needed no hand. Plain `git show <merge>` leaves out a
+  conflict resolved by taking one side. If a merge adds a declaration that
+  neither side has, that is new work: do *Four angles* after all.
+- Check each resolution. It keeps what the pull request added and what the
+  base branch added, and no declaration of either side is lost or there
+  twice. In `DESIGN.md` and under `design/`, a merge may instead take out
+  all of the pull request's entries for files, imports or lemmas that the
+  design did not name, in a conflict or not, and keep the base branch's
+  text; its corrections of what the design did name stay. Where the
+  author rewrote the base branch's new lines to fit the pull request, or
+  the pull request's to fit the base branch, each statement still says
+  what its name, its docstring and the design say, and the docstrings and
+  attributes next to a resolution are still right for the merged code.
+- Check what the base branch says of what the pull request changes. For
+  each declaration whose name, statement or attribute the pull request
+  changes or removes (`gh pr diff {{.Number}}`), grep the merged tree for
+  it (`git grep -n <name> -- '*.lean' DESIGN.md design`). A merge without
+  conflicts can bring in a docstring or a sentence of the design that the
+  pull request makes false.
+- Check that the build above passed.
+
+Here a finding is only for what a merge got wrong, for a docstring or a
+sentence of the design that the merged code makes false, for what no
+longer builds, for a defect that is plainly serious, or for a copy of the
+atlas's text. What the base branch brought in that the pull request could
+now use, or now repeats, does not send approved work back: create an
+issue for it, as below.
+
+Then go on from *The base branch*. If you approve, say in place of the
+line for each angle that the review follows the approval of `<reviewed>`
+and a merge of the base branch, and what you checked. On a design, still
+list the notes for later steps, repeated from the approval of
+`<reviewed>`.
+
 ## Four angles
 
 Review the latest commit from the four angles below, each by its own
@@ -63,16 +123,19 @@ suggestion in an approved review, so:
 
 - **Request changes** for what this pull request must change before it is
   merged: every finding that stands, whether `block` or `request changes`.
-  When the fix you give adds or moves a file, adds an import of another
-  part's file, or changes a name, a statement or an attribute that the
-  design gives, say in the same finding that the design must record it in
-  this pull request, and in which places, so that the fix does not bring a
-  finding of its own. For a Lean file added or an import of another part's
-  file, the place is the part's design file, where it has one, and not
-  `DESIGN.md`: do not ask for a record there, even where one of its lists
-  or "imports only" notes falls behind. A lemma that the pull request or
-  your fix adds beyond those the design names needs no record: do not ask
-  for one, unless it makes a sentence of the design false.
+  When the fix you give moves or renames a file or a declaration that the
+  design names, or changes a statement or an attribute that the design
+  gives, say in the same finding that this pull request must correct the
+  design, and in which places, so that the fix does not bring a finding
+  of its own. A Lean file, an import or a lemma that the pull request or
+  your fix adds beyond those the design names needs no record in
+  `DESIGN.md` or under `design/`: do not ask for one, even where the
+  issue or the design asks for it, or a list of files or of imports, or a
+  "used by" or "imports only" note, falls behind. Do not ask that one the
+  pull request has be taken out, unless the pull request conflicts with
+  the base branch there: then the fix is to take all such entries out and
+  keep the base branch's text. Ask for a correction only where the pull
+  request makes another sentence of the design false, such as a count.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere
