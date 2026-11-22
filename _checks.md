@@ -36,10 +36,18 @@
   design file, record it in `DESIGN.md`, wherever it gives that list. If
   it has one, a Lean file you add, or an import of another part's file, is
   recorded under `design/` and not in `DESIGN.md`: grep `design/` for a
-  neighbouring file's name to find the places. `DESIGN.md`'s lists of a
-  part's files and of what it imports may then fall behind, its "imports
-  only" notes included: every part's pull requests change `DESIGN.md`, and
-  a conflict there costs a fix and a second review. If the pull request
+  neighbouring file's name to find the places. In a table or a list of
+  files there, give the new file a row or a line of its own, and leave
+  the others as they are: do not reorder or re-wrap them. If the list is
+  in the order of the paths, the new file goes at its place in that
+  order; if not, next to the file it serves rather than at the end. Do not
+  write how many files there are; if a sentence counts the files of that
+  list ("the nine files outside that folder"), take the number out instead
+  of raising it. Pull requests that each add at the end, or each change
+  the number, conflict with one another. `DESIGN.md`'s lists of a part's
+  files and of what it imports may fall behind, its "imports only" notes
+  included: every part's pull requests change `DESIGN.md`, and a conflict
+  there costs a fix and a second review. If the pull request
   already has such additions in `DESIGN.md` and it conflicts there, take
   all of them out, not only the lines in conflict, and keep the base
   branch's text. A moved file or declaration, or a changed name, statement
@@ -50,10 +58,10 @@
   entry: do not add it to the design's file table or to its list of that
   file's declarations. Other open pull requests change those lines, and a
   conflict there costs a fix and a second review. If it makes a sentence
-  of the design false, such as a count, correct that sentence only. Where
-  the design is wrong in more than that, such as a definition, a milestone
-  or the build order, do as `AGENTS.md` says: propose the change in an
-  issue.
+  of the design false, such as a count of lemmas, correct that sentence
+  only. Where the design is wrong in more than that, such as a definition,
+  a milestone or the build order, do as `AGENTS.md` says: propose the
+  change in an issue.
 - **Blockers that match the design.** Agents do not change other issues'
   blockers, so they stay as they were set. If the work changes which parts
   or issues build on which (the build order in `DESIGN.md`, a part's
