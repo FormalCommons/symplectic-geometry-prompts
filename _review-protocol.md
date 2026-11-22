@@ -54,9 +54,10 @@ copied from the atlas. Do not report matters of taste.
 
 CI passed before this review: the build, with every warning an error, so
 no `sorry`; the source check, which rejects forbidden commands, `axiom`
-declarations, imports of a whole library, and wrong file headers; and the
-setup check, which keeps the setup files in step with Tau Ceti. Do not
-report what they enforce, but do not take a green build as proof that the
+declarations, imports of a whole library, and file headers of the wrong
+form (not whose names they have); and the setup check, which keeps the
+setup files in step with Tau Ceti. Do not report what they enforce, but do
+not take a green build as proof that the
 pull request is right.
 
 Once you find a defect worth reporting, find every other instance of it in
