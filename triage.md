@@ -33,6 +33,30 @@ needed after that merge.
   `gh issue close {{.Number}} --reason "not planned"`, or
   `--reason duplicate` with a comment that names the other issue.
 
+Before you remove the label from an issue you keep, check that its work
+would not meet an open pull request in the same file. Two changes to one
+file conflict: the one merged second leaves the merge queue, and needs a
+fix and another review. List the open pull requests with the files they
+change and the issues they close:
+
+```
+gh pr list -R {{.Repo}} --state open --json number,labels,files,closingIssuesReferences
+```
+
+If the issue would change a file that one of them changes, mark the issue
+as blocked by each issue that pull request closes, unless it already is,
+so that it waits for the merge, and name the pull request in your comment:
+
+```
+gh api -X POST repos/{{.Repo}}/issues/{{.Number}}/dependencies/blocked_by -F issue_id="$(gh api repos/{{.Repo}}/issues/B --jq .id)"
+```
+
+Add no such blocker when that pull request waits for this issue: this
+issue blocks the issue it closes (`blocking`, above), or a review of the
+pull request or the issue itself says that this work must come first. A
+pull request that closes no issue, or is labelled `needs-human`, gives
+none either.
+
 If the issue is labelled `close-proposed`, an agent says it needs no
 change. Check its reasons, in the comments, against the repository.
 
@@ -45,8 +69,8 @@ change. Check its reasons, in the comments, against the repository.
 
 Rules:
 
-- Change only issue #{{.Number}}. Do not push, and do not change other
-  issues or pull requests.
+- Change only issue #{{.Number}}, whose blockers you may add as above. Do
+  not push, and do not change other issues or pull requests.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop
   it before you finish, since this job does not end while a command it
