@@ -41,11 +41,12 @@
   requests of the part would write theirs at the same place, and a
   conflict there costs a fix and a second review. The design's lists of a
   part's files and of what it imports may fall behind, "used by" and
-  "imports only" notes included: leave them. What the design does say stays true: where the pull request
-  moves or renames a file or a declaration that the design names, first
-  writes one at another path or under another name, or gives one a
-  statement or an attribute that differs from the design's, correct it
-  wherever `DESIGN.md` or `design/` gives the old one: grep for it. Change
+  "imports only" notes included: leave them. What the design does say
+  stays true: where the pull request moves or renames a file or a
+  declaration that the design names, first writes one at another path or
+  under another name, or gives one a statement or an attribute that
+  differs from the design's, correct it wherever `DESIGN.md` or `design/`
+  gives the old one: grep for it. Change
   only the lines that name what changed, write no more than the code
   shows, and give the reason in the description. If the pull request makes
   any other sentence of the design false, such as a count of files or
