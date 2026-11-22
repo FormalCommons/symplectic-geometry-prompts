@@ -77,12 +77,14 @@
   module docstring by the name of the declaration it adapts; the
   description alone is not enough. Declarations taken from Tau Ceti's
   main branch, which the pinned version does not have, are in a file of
-  their own, as *Files* in `AGENTS.md` says: its first five lines are those
-  of Tau Ceti's file, with Tau Ceti's copyright line and `Authors:` line
-  and not the library's, and its module docstring names Tau Ceti's file and
-  commit and says each change you made to a statement or a proof. Tau
-  Ceti's license requires this, and CI does not check it. No prose copies the atlas's text: not
-  in code, comments, the description or commit messages. A milestone's
+  their own, as *Files* in `AGENTS.md` says. Its header, every line before
+  `module`, is that of Tau Ceti's file, with Tau Ceti's copyright line and
+  `Authors:` line and not the library's. Its module docstring names Tau
+  Ceti's file and each commit, and says each change you made to a
+  statement or a proof. It keeps what Tau Ceti's file says of where those
+  declarations come from. Tau Ceti's license requires this, and CI checks
+  only the header's form. No prose copies the atlas's text: not in code,
+  comments, the description or commit messages. A milestone's
   name, a Lean declaration's name, a formula and a citation of a published
   source are not copies. Write what you post in your own words from the
   start: a posted description is public at once. Run the atlas check
