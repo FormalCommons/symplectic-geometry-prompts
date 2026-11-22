@@ -26,8 +26,8 @@ to work on: a goal, and a way to tell when it is done. An issue that asks
 for changes once an open pull request merges is needed if they would be
 needed after that merge.
 
-- If it is all three, edit it if it needs it (`gh issue edit`), comment in
-  a line or two what you checked, make the check below, and then remove
+- If it is all three, edit it if it needs it (`gh issue edit`), make the
+  check below, comment in a line or two what you checked, and then remove
   the label: `gh issue edit {{.Number}} --remove-label proposed`.
 - If not, comment why and close it:
   `gh issue close {{.Number}} --reason "not planned"`, or
