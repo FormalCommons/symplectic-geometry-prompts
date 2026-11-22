@@ -26,11 +26,11 @@ the setup files.
 - **It fits the design.** The parts, files and names follow `DESIGN.md` and
   the part's design. A departure needs a reason in the description, and a
   change to the design in the same pull request or an issue that proposes
-  one. A lemma added beyond those the design names is not a departure: do
-  not ask that the design list it. A Lean file added, or an import of
-  another part's file, that the part's design file records needs no entry
-  in `DESIGN.md`, even where one of its lists or "imports only" notes
-  falls behind: do not ask for one.
+  one. A Lean file, an import or a lemma added beyond those the design
+  names is not a departure when it sits where `AGENTS.md` and the design
+  put its subject: do not ask that `DESIGN.md` or the part's design list
+  it, even where one of their lists of files or of imports, or an
+  "imports only" note, falls behind.
 - **Refactors are in scope** when their issue asks for one: reworking merged
   material needs no new claim. A refactor that its issue does not ask for,
   bundled with new work, is a second topic.

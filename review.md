@@ -48,9 +48,9 @@ error, skip this section and do *Four angles*.
   neither side has, that is new work: do *Four angles* after all.
 - Check each resolution. It keeps what the pull request added and what the
   base branch added, and no declaration of either side is lost or there
-  twice. In `DESIGN.md`'s lists of a part's files and imports, a
-  resolution may instead take the pull request's additions out and keep
-  the base branch's text. Where the author rewrote the base branch's new
+  twice. In `DESIGN.md` and under `design/`, a resolution may instead
+  take out the pull request's entries for files, imports or lemmas that
+  the design did not name, and keep the base branch's text. Where the author rewrote the base branch's new
   lines to fit the pull request, or the pull request's to fit the base
   branch, each statement still says what its name, its docstring and the
   design say, and the docstrings and attributes next to a resolution are
@@ -122,16 +122,17 @@ suggestion in an approved review, so:
 
 - **Request changes** for what this pull request must change before it is
   merged: every finding that stands, whether `block` or `request changes`.
-  When the fix you give adds or moves a file, adds an import of another
-  part's file, or changes a name, a statement or an attribute that the
-  design gives, say in the same finding that the design must record it in
-  this pull request, and in which places, so that the fix does not bring a
-  finding of its own. For a Lean file added or an import of another part's
-  file, the place is the part's design file, where it has one, and not
-  `DESIGN.md`: do not ask for a record there, even where one of its lists
-  or "imports only" notes falls behind. A lemma that the pull request or
-  your fix adds beyond those the design names needs no record: do not ask
-  for one, unless it makes a sentence of the design false.
+  When the fix you give moves or renames a file or a declaration that the
+  design names, or changes a statement or an attribute that the design
+  gives, say in the same finding that this pull request must correct the
+  design, and in which places, so that the fix does not bring a finding
+  of its own. A Lean file, an import or a lemma that the pull request or
+  your fix adds beyond those the design names needs no record in
+  `DESIGN.md` or under `design/`: do not ask for one, even where a list
+  of files or of imports, or an "imports only" note, falls behind, and do
+  not ask that one the pull request has be taken out. Ask for a
+  correction only where the addition makes another sentence of the design
+  false, such as a count.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere
