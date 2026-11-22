@@ -48,11 +48,12 @@ error, skip this section and do *Four angles*.
   neither side has, that is new work: do *Four angles* after all.
 - Check each resolution. It keeps what the pull request added and what the
   base branch added, and no declaration of either side is lost or there
-  twice. In `DESIGN.md` and under `design/`, a resolution may instead
-  take out the pull request's entries for files, imports or lemmas that
-  the design did not name, and keep the base branch's text. Where the author rewrote the base branch's new
-  lines to fit the pull request, or the pull request's to fit the base
-  branch, each statement still says what its name, its docstring and the
+  twice. In `DESIGN.md` and under `design/`, a merge may instead take out
+  all of the pull request's entries for files, imports or lemmas that the
+  design did not name, in a conflict or not, and keep the base branch's
+  text. Where the author rewrote the base branch's new lines to fit the
+  pull request, or the pull request's to fit the base branch, each
+  statement still says what its name, its docstring and the
   design say, and the docstrings and attributes next to a resolution are
   still right for the merged code.
 - Check what the base branch says of what the pull request changes. For
@@ -128,11 +129,13 @@ suggestion in an approved review, so:
   design, and in which places, so that the fix does not bring a finding
   of its own. A Lean file, an import or a lemma that the pull request or
   your fix adds beyond those the design names needs no record in
-  `DESIGN.md` or under `design/`: do not ask for one, even where a list
-  of files or of imports, or an "imports only" note, falls behind, and do
-  not ask that one the pull request has be taken out. Ask for a
-  correction only where the addition makes another sentence of the design
-  false, such as a count.
+  `DESIGN.md` or under `design/`: do not ask for one, even where the
+  issue or the design asks for it, or a list of files or of imports, or a
+  "used by" or "imports only" note, falls behind. Do not ask that one the
+  pull request has be taken out, unless the pull request conflicts with
+  the base branch there: then the fix is to take all such entries out and
+  keep the base branch's text. Ask for a correction only where the pull
+  request makes another sentence of the design false, such as a count.
 - **Create an issue** for work worth a pull request of its own that does not
   belong in this one: existing code that should now be shared, moved or
   generalized; material the pull request should drop; something elsewhere
