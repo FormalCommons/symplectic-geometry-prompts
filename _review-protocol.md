@@ -109,8 +109,10 @@ given to you. Check that each was answered, by a change or by a reply.
 Raise a new finding that does not block only for what changed since the last
 review, or for a defect that is plainly serious, or for a copy of the
 atlas's text, wherever it is. What changed are the pull request's own
-commits since the reviewed one (`git log --no-merges <reviewed>..HEAD`), not
-what a merge of the base branch brought in. When the author's
+commits since the reviewed one
+(`git log --first-parent --no-merges <reviewed>..HEAD`; without
+`--first-parent` the list also has every commit that a merge of the base
+branch brought in), not what such a merge brought in. When the author's
 reply quotes a conflicting finding from another angle or an earlier round,
 weigh it: restate your finding so that both hold, withdraw it if it was a
 preference or the other point meets it, or keep it if they do not really
