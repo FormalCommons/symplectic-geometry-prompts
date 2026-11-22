@@ -75,7 +75,13 @@
   sources the work follows. A proof that adapts one from Tau Ceti or
   Mathlib, with the same steps in another setting, is credited in the
   module docstring by the name of the declaration it adapts; the
-  description alone is not enough. No prose copies the atlas's text: not
+  description alone is not enough. Declarations taken from Tau Ceti's
+  main branch, which the pinned version does not have, are in a file of
+  their own, as *Files* in `AGENTS.md` says: its first five lines are those
+  of Tau Ceti's file, with Tau Ceti's copyright line and `Authors:` line
+  and not the library's, and its module docstring names Tau Ceti's file and
+  commit and says each change you made to a statement or a proof. Tau
+  Ceti's license requires this, and CI does not check it. No prose copies the atlas's text: not
   in code, comments, the description or commit messages. A milestone's
   name, a Lean declaration's name, a formula and a citation of a published
   source are not copies. Write what you post in your own words from the

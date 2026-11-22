@@ -70,6 +70,23 @@ the setup files.
   its counterpart. The same construction and the same steps in another
   setting need credit in the module docstring, by the name of the
   declaration adapted; using a lemma is not adapting it.
+- A file may take declarations from Tau Ceti's main branch that the pinned
+  version does not have, as *Files* in `AGENTS.md` says. Tau Ceti's license
+  then requires that the file keeps Tau Ceti's notices, and CI's check of the
+  header does not look at whose names it has. For each such file, read the
+  first five lines of Tau Ceti's file at the commit the docstring names
+  (`gh api "repos/TauCetiProject/TauCeti/contents/<path>?ref=<commit>" -H "Accept: application/vnd.github.raw" | head -5`)
+  and check that:
+  - the file's first five lines are those, with Tau Ceti's copyright line
+    and its `Authors:` line, which may name people;
+  - the file has only declarations taken from that file, under Tau Ceti's
+    names, at Tau Ceti's path with `SymplecticGeometry/` for `TauCeti/`;
+  - the module docstring names Tau Ceti's file and the commit, and says
+    each change to a statement or a proof. Compare the declarations with
+    Tau Ceti's to see that it does.
+
+  A new declaration elsewhere that has the name and the proof of one on Tau
+  Ceti's main branch is such a copy too, and belongs in such a file.
 - Do not ask for credit for routine work that follows nothing in particular.
   The atlas itself is not credited in Lean files: a milestone's docstring
   line, "Milestone: *…*", is the only place a Lean file mentions it.
@@ -96,7 +113,8 @@ copy there is a note for the maintainer in your summary, not a finding.
   formalization) without credit.
 - `request changes` for material that does not belong to the issue or a
   second topic (remove it, and open an issue for it); a copy of the atlas's
-  text in a file or the description; a description that does not say what
+  text in a file or the description; a file taken from Tau Ceti without
+  Tau Ceti's first five lines, or with changes its docstring does not say; a description that does not say what
   it does and why, names no sources, or lacks its `Closes #…` or
   `Part of #…` line; a departure from the design without a reason; a size
   limit exceeded; a setup change outside a move or a person's issue; a
