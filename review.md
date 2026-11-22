@@ -19,38 +19,62 @@ the pull request's head.
 
 ## After an approval, only a merge of the base branch
 
-Look at the latest review. If it approved, its state is `APPROVED` or
-`DISMISSED`: take the commit it reviewed (`commit_id`), and list the pull
-request's own commits since then with
-`git log --first-parent --no-merges <reviewed>..HEAD`. If there are none,
-the author has only merged the base branch since the approval, because the
-pull request conflicted with it or left the merge queue. The work was
-approved from all four angles and does not need them again. Do this
-section yourself, with no subagents, in place of *Four angles*:
+Look at the latest review by `formalcommons-reviewer[bot]`, the account
+that review jobs post as; a review by anyone else does not count here. If
+it approved (its state is `APPROVED`, or `DISMISSED` with a body that
+approves, since a push dismisses an approval), take the commit it reviewed
+(`commit_id`), `<reviewed>` below, and check all three:
 
-- Read what each merge changed by hand. List the merges with
-  `git log --first-parent --merges <reviewed>..HEAD`. For a merge,
-  `git show <merge>` prints only the places where the result differs from
-  both sides: the conflicts that the author resolved, and nothing for a
-  merge without conflicts.
+- `git merge-base --is-ancestor <reviewed> HEAD` succeeds;
+- `git log --first-parent --no-merges <reviewed>..HEAD` lists nothing: the
+  author has made no commit of their own since;
+- `git log --first-parent --merges <reviewed>..HEAD` lists at least one
+  merge, and each merged the base branch:
+  `git merge-base --is-ancestor <merge>^2 origin/main` succeeds.
+
+If all three hold, the author has only merged the base branch since the
+approval, because the pull request conflicted with it or left the merge
+queue. The work was approved from all four angles and does not need them
+again: do this section yourself, with no subagents, in place of *Four
+angles*. In every other case, or if a command of this section gives an
+error, skip this section and do *Four angles*.
+
+- Read what each merge changed by hand. `git show --remerge-diff <merge>`
+  merges the two sides again and prints how the commit differs from that:
+  each conflict, with its markers, and how the author resolved it, a side
+  that was dropped included; each change outside a conflict; and nothing
+  for a merge that needed no hand. Plain `git show <merge>` leaves out a
+  conflict resolved by taking one side. If a merge adds a declaration that
+  neither side has, that is new work: do *Four angles* after all.
 - Check each resolution. It keeps what the pull request added and what the
-  base branch added, in the Lean files and in the design, and no
-  declaration of either side is lost or there twice. Where the author
-  rewrote the base branch's new lines to fit the pull request, or the pull
-  request's to fit the base branch, each statement still says what its
-  name, its docstring and the design say, and the docstrings and
-  attributes next to a resolution are still right for the merged code.
+  base branch added, and no declaration of either side is lost or there
+  twice. In `DESIGN.md`'s lists of a part's files and imports, a
+  resolution may instead take the pull request's additions out and keep
+  the base branch's text. Where the author rewrote the base branch's new
+  lines to fit the pull request, or the pull request's to fit the base
+  branch, each statement still says what its name, its docstring and the
+  design say, and the docstrings and attributes next to a resolution are
+  still right for the merged code.
+- Check what the base branch says of what the pull request changes. For
+  each declaration whose name, statement or attribute the pull request
+  changes or removes (`gh pr diff {{.Number}}`), grep the merged tree for
+  it (`git grep -n <name> -- '*.lean' DESIGN.md design`). A merge without
+  conflicts can bring in a docstring or a sentence of the design that the
+  pull request makes false.
 - Check that the build above passed.
 
-Here a finding is only for what a merge got wrong, for what no longer
-builds, for a defect that is plainly serious, or for a copy of the atlas's
-text. What the base branch brought in that the pull request could now
-use, or now repeats, does not send approved work back: create an issue
-for it, as below.
+Here a finding is only for what a merge got wrong, for a docstring or a
+sentence of the design that the merged code makes false, for what no
+longer builds, for a defect that is plainly serious, or for a copy of the
+atlas's text. What the base branch brought in that the pull request could
+now use, or now repeats, does not send approved work back: create an
+issue for it, as below.
 
 Then go on from *The base branch*. If you approve, say in place of the
 line for each angle that the review follows the approval of `<reviewed>`
-and a merge of the base branch, and what you checked.
+and a merge of the base branch, and what you checked. On a design, still
+list the notes for later steps, repeated from the approval of
+`<reviewed>`.
 
 ## Four angles
 
