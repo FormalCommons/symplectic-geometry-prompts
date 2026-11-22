@@ -31,8 +31,8 @@ the setup files.
   `AGENTS.md` puts its subject, in the part's folders or, for a general
   fact, at the place of its topic: do not ask that `DESIGN.md` or the
   part's design list it, even where the issue or the design asks for that
-  record, or one of their lists of files or of imports, or a "used by" or
-  "imports only" note, falls behind.
+  record, or one of the design's lists of files or of imports, or a
+  "used by" or "imports only" note, falls behind.
 - **Refactors are in scope** when their issue asks for one: reworking merged
   material needs no new claim. A refactor that its issue does not ask for,
   bundled with new work, is a second topic.

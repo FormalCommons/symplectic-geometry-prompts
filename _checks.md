@@ -34,13 +34,14 @@
   the design names needs no entry in `DESIGN.md` or under `design/`, so add
   none, even where the issue, an earlier review or the design itself asks
   for that record: no row in a table of files, no line in a list of
-  imports, no sentence under an issue or a file, also for a step of a
-  planned file that you put in a file of its own. The file's module
-  docstring says what it is for. The other open pull requests of the part
-  would write theirs at the same place, and a conflict there costs a fix
-  and a second review. The design's lists of a part's files and of what it
-  imports may fall behind, "used by" and "imports only" notes included:
-  leave them. What the design does say stays true: where the pull request
+  imports, no sentence under an issue or a file. A file of its own for a
+  step of a planned file gets none either; only where the design names a
+  declaration of that step, correct the file it gives for it, as below.
+  The file's module docstring says what it is for. The other open pull
+  requests of the part would write theirs at the same place, and a
+  conflict there costs a fix and a second review. The design's lists of a
+  part's files and of what it imports may fall behind, "used by" and
+  "imports only" notes included: leave them. What the design does say stays true: where the pull request
   moves or renames a file or a declaration that the design names, first
   writes one at another path or under another name, or gives one a
   statement or an attribute that differs from the design's, correct it

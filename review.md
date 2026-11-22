@@ -51,11 +51,11 @@ error, skip this section and do *Four angles*.
   twice. In `DESIGN.md` and under `design/`, a merge may instead take out
   all of the pull request's entries for files, imports or lemmas that the
   design did not name, in a conflict or not, and keep the base branch's
-  text. Where the author rewrote the base branch's new lines to fit the
-  pull request, or the pull request's to fit the base branch, each
-  statement still says what its name, its docstring and the
-  design say, and the docstrings and attributes next to a resolution are
-  still right for the merged code.
+  text; its corrections of what the design did name stay. Where the
+  author rewrote the base branch's new lines to fit the pull request, or
+  the pull request's to fit the base branch, each statement still says
+  what its name, its docstring and the design say, and the docstrings and
+  attributes next to a resolution are still right for the merged code.
 - Check what the base branch says of what the pull request changes. For
   each declaration whose name, statement or attribute the pull request
   changes or removes (`gh pr diff {{.Number}}`), grep the merged tree for
