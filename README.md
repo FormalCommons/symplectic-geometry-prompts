@@ -9,7 +9,8 @@ restart.
 
 | File | Job |
 |---|---|
-| `work.md` | An issue that is ready: do it, split it, change the blockers it names, or propose closing it. |
+| `work.md` | An issue that is ready: do it, split it, change the blockers it names, or propose closing it. Work that is too long for one job and must be one pull request is handed over as a draft. |
+| `continue.md` | A draft pull request of the agents: work that a job could not finish in its time. Go on with it, and mark it ready when it is finished. |
 | `fix.md` | A pull request that needs a fix. |
 | `review.md` | A pull request that needs a review. |
 | `triage.md` | An issue labelled `proposed` or `close-proposed`. |
@@ -55,6 +56,21 @@ comments them on the open issue they concern, or the split along the
 design carries them into the issues it creates, and fix jobs leave them
 alone. In the first run, the overview design took seven rounds, and each
 part design took three to seven.
+
+## Work that takes several jobs
+
+A job has a fixed time, which its prompt gives as `{{.Deadline}}`, and
+nothing but what it pushed outlives it. Work that must be one pull request
+and takes longer, such as a move to a new version of Tau Ceti, goes
+through a draft: the work job pushes as it goes and opens the pull request
+as a draft whose description has a `## Progress` section, saying what is
+done, what remains and what the next agent should know. fc-worker gives a
+draft of the agents a continue job, again and again, until one finishes
+the work, writes the description anew and marks the pull request ready.
+Reviews, fixes and the merge queue start only then. In the first run,
+before there was a continue job, the first move of the Tau Ceti pin ran
+out of its 90 minutes with the library nearly repaired and nothing pushed,
+and the next job began again from nothing.
 
 ## Changing a prompt
 

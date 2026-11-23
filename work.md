@@ -30,13 +30,18 @@ Then make progress on the issue in one of these ways:
   on. If an earlier pull request for this issue was closed, read its reviews
   first (`gh pr list --state closed --head fc/issue-{{.Number}}`, and the
   same for `-2` and so on, then `gh pr view <number> --comments`), so as not
-  to repeat what they found. Make sure the work builds and passes the checks
+  to repeat what they found. If GitHub has the branch already, with no
+  pull request (`git ls-remote --heads origin 'fc/issue-{{.Number}}*'`,
+  `gh pr list --state all --head <branch>`), an earlier job was stopped
+  before it opened one: check the branch out and go on from its commits.
+  Make sure the work builds and passes the checks
   that `AGENTS.md` describes, commit, check it against the points below,
-  push, and open a pull request with `gh pr create`, ready for review, not
-  as a draft. Its description says what it does and why, names the sources
+  push, and open a pull request with `gh pr create`, ready for review. Its
+  description says what it does and why, names the sources
   it follows, and ends with `Closes #{{.Number}}`. Never copy the atlas's
   text into it, or into a commit message: this repository is public. Once
-  it is open, create any issue that the points below ask for then.
+  it is open, create any issue that the points below ask for then. If the
+  work takes longer than this job has, see **Out of time** below.
 - **Split it.** If the issue is too big for one pull request, or needs other
   work first, create an issue for each part, labelled `proposed`, with a
   clear goal and a way to tell when it is done. Do not ask in an issue
@@ -69,10 +74,36 @@ Then make progress on the issue in one of these ways:
   it asks for where it is done: the file and the name of the definition,
   function or theorem, and the pull request or issue that did it.
 
-Before you push work for a pull request, review it as its reviewer will:
-read your committed changes (`git diff origin/main...`, or against
-whichever branch the pull request targets) and check each of these,
-fixing what falls short.
+**Out of time.** This job is stopped at {{.Deadline}}; `date -u` gives the
+time now. Nothing survives it but what you pushed. So when the work is
+long, such as a move to a new version of Tau Ceti, commit and push to the
+branch each time a step is done, before you know whether you will finish.
+A full build takes many minutes: look at the time before you start one.
+If the work will not be finished and checked 20 minutes before that time,
+hand it over: push what you have, and open the pull request as a draft
+(`gh pr create --draft --body-file /tmp/description.md`). Its description
+ends with `Closes #{{.Number}}`, and has a section `## Progress` that
+says:
+
+- what is done, and whether the branch builds (`lake build --wfail`), or
+  which files do not build yet;
+- what remains, in the order to do it;
+- what the next agent should know: what you tried that failed, and why,
+  what changed upstream that broke several files, and which commands take
+  long.
+
+Write it in your own words, and run the atlas check below on it and on
+your commit messages before you post it. Later jobs go on from the draft,
+each with a fresh agent that knows only what the branch and that section
+tell it, until one finishes the work and marks the pull request ready for
+review. A draft is for work that must be one pull request, such as an
+issue that says it must not be split. Where parts of the work could be
+merged one by one, **Split it** instead.
+
+Before you push work for a pull request that is ready for review, review
+it as its reviewer will: read your committed changes
+(`git diff origin/main...`, or against whichever branch the pull request
+targets) and check each of these, fixing what falls short.
 
 {{template "_checks.md" .}}
 

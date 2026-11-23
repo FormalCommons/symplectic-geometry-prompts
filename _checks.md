@@ -126,7 +126,7 @@
 The atlas check searches `/atlas` for every run of eight words, ignoring
 case and punctuation, in the files the branch changes, its commit messages
 and the description. Save the description you will post as
-`/tmp/description.md` (in a fix job, the pull request's current one, from
+`/tmp/description.md` (in a fix or continue job, the pull request's current one, from
 `gh pr view <number> --json body -q .body`, with your changes), and post
 that file (`gh pr create --body-file /tmp/description.md`, or
 `gh pr edit <number> --body-file /tmp/description.md`). Then run:
