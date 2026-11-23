@@ -30,10 +30,13 @@ Then make progress on the issue in one of these ways:
   on. If an earlier pull request for this issue was closed, read its reviews
   first (`gh pr list --state closed --head fc/issue-{{.Number}}`, and the
   same for `-2` and so on, then `gh pr view <number> --comments`), so as not
-  to repeat what they found. If GitHub has the branch already, with no
-  pull request (`git ls-remote --heads origin 'fc/issue-{{.Number}}*'`,
-  `gh pr list --state all --head <branch>`), an earlier job was stopped
-  before it opened one: check the branch out and go on from its commits.
+  to repeat what they found. If GitHub already has a branch for this
+  issue with no pull request
+  (`git ls-remote --heads origin 'fc/issue-{{.Number}}' 'fc/issue-{{.Number}}-*'`,
+  then `gh pr list --state all --head <branch>` for each; a branch that
+  ends in `-errata` is not one of these), an earlier job was stopped
+  before it opened one: check out the latest of them and go on from its
+  commits, after reading them (`git log origin/main..HEAD`).
   Make sure the work builds and passes the checks
   that `AGENTS.md` describes, commit, check it against the points below,
   push, and open a pull request with `gh pr create`, ready for review. Its
@@ -75,15 +78,31 @@ Then make progress on the issue in one of these ways:
   function or theorem, and the pull request or issue that did it.
 
 **Out of time.** This job is stopped at {{.Deadline}}; `date -u` gives the
-time now. Nothing survives it but what you pushed. So when the work is
-long, such as a move to a new version of Tau Ceti, commit and push to the
-branch each time a step is done, before you know whether you will finish.
-A full build takes many minutes: look at the time before you start one.
-If the work will not be finished and checked 20 minutes before that time,
-hand it over: push what you have, and open the pull request as a draft
-(`gh pr create --draft --body-file /tmp/description.md`). Its description
-ends with `Closes #{{.Number}}`, and has a section `## Progress` that
-says:
+time now. Nothing survives it but what you pushed. Decide this before you
+begin: if parts of the work could be merged one by one, **Split it** now,
+and do not start a branch. The rest of this section is for work that must
+be one pull request and may take longer than this job has, such as a move
+to a new version of Tau Ceti, or an issue that says it must not be split.
+
+Commit and push to the branch each time a step is done, before you know
+whether you will finish. `AGENTS.md` says that the build must succeed
+before you push: that holds for a pull request that is ready for review.
+A push to a branch that has no pull request yet, or to a draft, may be of
+work that does not build yet. Before each push, run the atlas check below
+on the files you changed and on your commit messages (leave
+`/tmp/description.md` out of the command while you have no description:
+the script stops at a file that is not there). A pushed commit is public
+at once, and its message cannot be reworded.
+
+A full build takes many minutes: after each push look at the time, and do
+not start a build that would end less than 20 minutes before the job is
+stopped. Once fewer than 20 minutes remain and the work is not finished
+and checked, stop and hand it over: push what you have, then open the
+pull request as a draft
+(`gh pr create --draft --title "…" --body-file /tmp/description.md`). Open
+it last, and push nothing after it: another agent may take the draft up at
+once. Its description ends with `Closes #{{.Number}}`, and has a section
+`## Progress` that says:
 
 - what is done, and whether the branch builds (`lake build --wfail`), or
   which files do not build yet;
@@ -92,13 +111,12 @@ says:
   what changed upstream that broke several files, and which commands take
   long.
 
-Write it in your own words, and run the atlas check below on it and on
-your commit messages before you post it. Later jobs go on from the draft,
-each with a fresh agent that knows only what the branch and that section
-tell it, until one finishes the work and marks the pull request ready for
-review. A draft is for work that must be one pull request, such as an
-issue that says it must not be split. Where parts of the work could be
-merged one by one, **Split it** instead.
+Write it in your own words, and run the atlas check on it before you post
+it. Create no follow-up issues for a draft: the job that finishes it does
+that. Later jobs go on from the draft, each with a fresh agent that knows
+only what the branch and that section tell it, until one finishes the work
+and marks the pull request ready for review. Do not open a draft for work
+that you can finish and check in this job.
 
 Before you push work for a pull request that is ready for review, review
 it as its reviewer will: read your committed changes

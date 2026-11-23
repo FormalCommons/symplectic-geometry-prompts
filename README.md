@@ -67,7 +67,9 @@ as a draft whose description has a `## Progress` section, saying what is
 done, what remains and what the next agent should know. fc-worker gives a
 draft of the agents a continue job, again and again, until one finishes
 the work, writes the description anew and marks the pull request ready.
-Reviews, fixes and the merge queue start only then. In the first run,
+Reviews, fixes and the merge queue start only then. A draft whose jobs
+stop making progress waits for a person instead: after three jobs in a
+row that end without a new commit, or after 20 rounds. In the first run,
 before there was a continue job, the first move of the Tau Ceti pin ran
 out of its 90 minutes with the library nearly repaired and nothing pushed,
 and the next job began again from nothing.
