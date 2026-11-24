@@ -121,7 +121,7 @@
 - **It still works with the latest base branch**, which may have moved since
   the branch was made: `git fetch origin`, merge the base branch
   (`git merge origin/main`, or whichever branch the pull request targets),
-  and build and test again.
+  and build again as `AGENTS.md` says, and test.
 
 The atlas check searches `/atlas` for every run of eight words, ignoring
 case and punctuation, in the files the branch changes, its commit messages
