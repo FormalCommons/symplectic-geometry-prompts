@@ -116,8 +116,8 @@ Last, check that it still works with the latest base branch, which may have
 moved since the pull request began, or while you reviewed: `git fetch
 origin`, merge the base branch into your checkout (`git merge origin/main`,
 or whichever branch the pull request targets), and build again, with every
-command under *Building*. Do not push the merge. If it conflicts, or the merged code fails, that is a finding:
-request changes and say what breaks.
+command under *Building*. Do not push the merge. If it conflicts, or the
+merged code fails, that is a finding: request changes and say what breaks.
 
 Then decide what to do with each finding and suggestion. Nobody acts on a
 suggestion in an approved review, so:
