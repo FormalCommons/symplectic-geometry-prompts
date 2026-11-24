@@ -13,9 +13,9 @@ is part of, and its changes (`gh pr diff {{.Number}}`).
 
 ## Build
 
-Build it as `AGENTS.md` says (`lake exe cache get`, then
-`lake build --wfail`). The subagents check statements against this build of
-the pull request's head.
+Build it as `AGENTS.md` says: every command under *Building* there, in
+order, ending with `lake build --wfail`. The subagents check statements
+against this build of the pull request's head.
 
 ## After an approval, only a merge of the base branch
 
@@ -99,10 +99,11 @@ Give each subagent:
   is yours;
 - these limits: it only reports back to you. It posts no review or comment,
   creates no issue, pushes nothing, and leaves the checkout as it is: no
-  `git checkout`, `merge`, `stash` or `lake build`, since builds and changes
-  in one checkout collide. It may grep, read, and check statements in
-  scratch files under `/tmp/<angle>/` with `lake env lean`. It should
-  finish within about 20 minutes, and report what it has by then.
+  `git checkout`, `merge`, `stash` or `lake build`, and none of the other
+  commands under *Building* in `AGENTS.md`, since builds and changes in one
+  checkout collide. It may grep, read, and check statements in scratch
+  files under `/tmp/<angle>/` with `lake env lean`. It should finish within
+  about 20 minutes, and report what it has by then.
 
 When the subagents return, check each finding's evidence, drop one you can
 show is wrong, merge findings that several angles report, and settle findings
@@ -114,9 +115,9 @@ nothing, judge its angle yourself: never approve without all four.
 Last, check that it still works with the latest base branch, which may have
 moved since the pull request began, or while you reviewed: `git fetch
 origin`, merge the base branch into your checkout (`git merge origin/main`,
-or whichever branch the pull request targets), and build again. Do not push
-the merge. If it conflicts, or the merged code fails, that is a finding:
-request changes and say what breaks.
+or whichever branch the pull request targets), and build again, with every
+command under *Building*. Do not push the merge. If it conflicts, or the
+merged code fails, that is a finding: request changes and say what breaks.
 
 Then decide what to do with each finding and suggestion. Nobody acts on a
 suggestion in an approved review, so:
