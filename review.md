@@ -13,9 +13,9 @@ is part of, and its changes (`gh pr diff {{.Number}}`).
 
 ## Build
 
-Build it as `AGENTS.md` says (`lake exe cache get`, then
-`lake build --wfail`). The subagents check statements against this build of
-the pull request's head.
+Build it as `AGENTS.md` says: every command under *Building* there, in
+order, ending with `lake build --wfail`. The subagents check statements
+against this build of the pull request's head.
 
 ## After an approval, only a merge of the base branch
 

@@ -35,9 +35,9 @@ Find out where the work stands:
 An agent like you wrote the Progress section, at the end of its time. So
 merge the base branch first (`git fetch origin`, then
 `git merge origin/main`, or whichever branch the pull request targets), so
-that the work does not fall behind it, and build (`lake exe cache get`,
-then `lake build --wfail`) before you rely on what the section says is
-done.
+that the work does not fall behind it, and build as `AGENTS.md` says
+(every command under *Building* there, in order, ending with
+`lake build --wfail`) before you rely on what the section says is done.
 
 Then take what remains in order. Each time a step is done, commit and
 push, without force-pushing, even where the branch does not build yet:
