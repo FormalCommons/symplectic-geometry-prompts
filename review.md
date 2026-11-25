@@ -29,8 +29,10 @@ approves, since a push dismisses an approval), take the commit it reviewed
 - `git log --first-parent --no-merges <reviewed>..HEAD` lists nothing: the
   author has made no commit of their own since;
 - `git log --first-parent --merges <reviewed>..HEAD` lists at least one
-  merge, and each merged the base branch:
-  `git merge-base --is-ancestor <merge>^2 origin/main` succeeds.
+  merge, and each merged the base branch and nothing else, whatever its
+  message says: `git show -s --format=%P <merge>` lists exactly two
+  commits, and `git merge-base --is-ancestor <merge>^2 origin/main`
+  succeeds.
 
 If all three hold, the author has only merged the base branch since the
 approval, because the pull request conflicted with it or left the merge
@@ -77,34 +79,55 @@ and a merge of the base branch, and what you checked. On a design, still
 list the notes for later steps, repeated from the approval of
 `<reviewed>`.
 {{if .First}}
-**This pull request merges first.** Since its first approval the workers
-keep every other pull request out of the merge queue until this one has
-merged, and a fix job has merged the base branch into it and repaired what
-the base branch's newer commits broke. All the others wait for this
-review, so it covers what changed since the approval and no more. Take as
-`<reviewed>` the commit of the reviewer's latest review that approved,
-even if a later review of its requested changes. If the first of the three
-checks above holds for it and the second does not (the author has made
-commits of their own since), the paragraph above would send the whole
-pull request to *Four angles*. For this one, do this instead:
+**This pull request merges first.** The reviewer has approved a commit of
+it, and since then the workers keep every other pull request out of the
+merge queue until this one has merged. Its fix jobs are told to merge the
+base branch and to change only what the merge or a finding calls for. All
+the others wait for this review, so where the history allows it, review
+only what changed since the approval.
 
-- Read the difference, commit by commit
-  (`git log --first-parent --reverse <reviewed>..HEAD`): a merge of the
-  base branch with `git show --remerge-diff <merge>`, and check it as
-  above; any other commit with `git show <commit>`. If one of the merges
-  did not merge the base branch, stop here and do *Four angles* for the
-  whole pull request.
+For this pull request, `<reviewed>` is the commit of the reviewer's latest
+review that approved (its state is `APPROVED`, or `DISMISSED` with a body
+that approves), even if the reviewer requested changes in a later review.
+A dismissed review whose body requests changes is not an approval. Do the
+three checks above with this `<reviewed>`:
+
+- No review of the reviewer's approved, or `<reviewed>` is `HEAD`, or the
+  first check fails (the history was rewritten since), or a command gives
+  an error: do *Four angles* for the whole pull request.
+- All three hold: do the section above, also when the latest review
+  requested changes, and then check that the merges, or the author's
+  replies, answer each finding of the reviews since `<reviewed>`.
+- The first holds and the second does not (the author has made commits of
+  their own since): do the list below, in place of *Four angles*.
+
+In that last case:
+
+- List the commits since `<reviewed>`
+  (`git log --first-parent --reverse <reviewed>..HEAD`). For each merge
+  among them, check that it merged the base branch and nothing else,
+  whatever its message says: `git show -s --format=%P <merge>` lists
+  exactly two commits, and
+  `git merge-base --is-ancestor <merge>^2 origin/main` succeeds. If one
+  fails, stop here and do *Four angles* for the whole pull request: what
+  such a merge brings in shows in neither command below.
+- Read each commit: a merge with `git show --remerge-diff <merge>`,
+  checked as in the section above; any other with `git show <commit>`.
 - If a review since `<reviewed>` requested changes, check that the
-  commits answer each of its findings.
-- If the author's commits change only proofs, imports, and names or
-  notation that the base branch or a dependency changed, and neither add
-  a declaration nor change a statement, a docstring's claim or the
-  design, judge them yourself, with no subagents, by the review protocol
-  and the four angles below as far as they bear on the changed lines.
+  commits, or the author's replies, answer each of its findings.
+- If the author's commits, and what the merges change beyond taking both
+  sides, change only proofs, imports, and names or notation that the base
+  branch or a dependency changed, and neither add nor remove a
+  declaration, nor change a statement, the body of a definition or of an
+  instance (other than such a name), an attribute, a docstring's claim,
+  the design, `ERRATA.md` or a setup file, judge them yourself, with no
+  subagents, by the review protocol and the four angles below as far as
+  they bear on the changed lines.
 - Otherwise do *Four angles* for the difference only: tell each subagent
   that `<reviewed>` was approved from its angle, give it the commits since
   and how to read each, and tell it to report only on what they change,
-  reading the rest as context.
+  reading the rest as context, except a defect that is plainly serious or
+  a copy of the atlas's text, which is a finding wherever it is.
 - Check that the build above passed.
 
 Then go on from *The base branch*. If you approve, say for each angle
@@ -152,9 +175,12 @@ This pull request will merge first, and the reviewer has not approved it
 yet. Once you approve, the workers keep every other pull request out of
 the merge queue until it has merged, and a fix job merges the base branch
 into it and repairs what breaks; you then review that difference. Until
-then the base branch moves faster than a fix could follow. So leave this
-check out: do not merge the base branch, and neither a conflict with it
-nor something that only its newer commits break is a finding.
+then the base branch moves faster than a fix could follow. So do not
+check it against the latest base branch: do not merge the base branch, and
+neither a conflict with it nor something that only its newer commits break
+is a finding. Everything else is as strict as for any pull request: the
+later review covers only what the fix changes, so what you approve now is
+not read again.
 {{- else -}}
 Last, check that it still works with the latest base branch, which may have
 moved since the pull request began, or while you reviewed: `git fetch

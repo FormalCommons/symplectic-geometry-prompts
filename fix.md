@@ -15,9 +15,9 @@ Find out what is wrong:
   lines of code: `gh api repos/{{.Repo}}/pulls/{{.Number}}/comments`.
 - Failing checks: `gh pr checks {{.Number}}`, then
   `gh run view <run-id> --log-failed`. The checks build the pull request
-  merged with the base branch as it was when they began. If what fails is
-  nothing that the pull request changes, merge the base branch and fix
-  what breaks.
+  merged with the base branch as it was when they began. So a check can
+  fail for something that only the base branch's newer commits bring:
+  then merge the base branch and fix what breaks.
 - A conflict: merge the base branch (`git merge origin/main`, or whichever
   branch the pull request targets) and resolve it.
 - Removed from the merge queue: the queue tested it together with newer
@@ -32,32 +32,43 @@ Find out what is wrong:
   what failed; if the merge brought in nothing new, push nothing.
 - A review says it breaks when merged with the base branch: merge the
   base branch and fix what breaks.
-- The base branch has commits that it lacks: merge the base branch and
-  fix what breaks. Push the merge even if nothing breaks: the checks and
-  the merge queue then test what will merge.
+- The reason above says that it is approved, but the base branch has
+  commits that it lacks: merge the base branch and fix what breaks. Push
+  the merge even if nothing breaks: the checks and the merge queue then
+  test what will merge.
 {{if .First}}
 This pull request merges first. The reviewer has approved a commit of it,
 and since then the workers keep every other pull request out of the merge
 queue until this one has merged: all of them wait for this fix. The next
 review looks only at what changed since the approval. So:
 
-- Merge the base branch first, whatever the reason above, and fix what
-  that breaks.
-- Change nothing that neither the reason above nor the merge calls for.
+- Merge the base branch first, whatever the reason this pull request
+  needs a fix, and fix what that breaks.
+- Change only what that reason or the merge calls for. Where you can,
+  repair by changing proofs, imports and names: a new declaration, or a
+  changed statement or docstring, is reviewed from all four angles while
+  the others wait, so make one only if the merge requires it, and say why
+  in your comment.
 - Commit the merge by itself, with its conflicts resolved, and then each
   repair in a commit of its own, so that the review can read them one by
   one.
 - Before you push, `git fetch origin` once more, and merge and build
   again if the base branch has moved: pull requests that were in the
   merge queue already still merge.
+- This job is stopped at {{.Deadline}}; `date -u` gives the time now, and
+  nothing survives it but what you pushed. If you cannot finish, push the
+  merge and the repairs you have about ten minutes before, even though
+  the build fails, and say in your comment what remains: the failed
+  checks bring the next fix job, which goes on from your push.
 {{else if .Leads}}
 This pull request will merge first: once the reviewer approves it, the
 workers keep every other pull request out of the merge queue until it has
 merged. Until then the base branch keeps moving, and the checks build
 your push merged with it. So merge the base branch before you fix
 anything else, and fix what that breaks too. Before you push,
-`git fetch origin` once more, and merge and build again if the base branch
-has moved.
+`git fetch origin` once more; if the base branch has moved, merge it and
+build one more time, and then push even if it has moved again: the review
+does not count a later conflict against the pull request.
 {{end}}
 Read the issue the pull request closes or is part of, so that the fix
 still does what the issue asks. A review's "Notes for later steps:" are
