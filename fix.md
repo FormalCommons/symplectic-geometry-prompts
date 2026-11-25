@@ -47,8 +47,8 @@ review looks only at what changed since the approval. So:
 - Change only what that reason or the merge calls for. Where you can,
   repair by changing proofs, imports and names: a new declaration, or a
   changed statement or docstring, is reviewed from all four angles while
-  the others wait, so make one only if the merge requires it, and say why
-  in your comment.
+  the others wait, so make one only if the merge or a finding requires
+  it, and say why in your comment.
 - Commit the merge by itself, with its conflicts resolved, and then each
   repair in a commit of its own, so that the review can read them one by
   one.
@@ -57,9 +57,10 @@ review looks only at what changed since the approval. So:
   merge queue already still merge.
 - This job is stopped at {{.Deadline}}; `date -u` gives the time now, and
   nothing survives it but what you pushed. If you cannot finish, push the
-  merge and the repairs you have about ten minutes before, even though
-  the build fails, and say in your comment what remains: the failed
-  checks bring the next fix job, which goes on from your push.
+  merge and the repairs you have about ten minutes before that time, even
+  though the build fails: run the atlas check below first, and say in
+  your comment what remains. The failed checks bring the next fix job,
+  which goes on from your push.
 {{else if .Leads}}
 This pull request will merge first: once the reviewer approves it, the
 workers keep every other pull request out of the merge queue until it has

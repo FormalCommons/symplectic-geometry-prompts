@@ -93,8 +93,10 @@ A dismissed review whose body requests changes is not an approval. Do the
 three checks above with this `<reviewed>`:
 
 - No review of the reviewer's approved, or `<reviewed>` is `HEAD`, or the
-  first check fails (the history was rewritten since), or a command gives
-  an error: do *Four angles* for the whole pull request.
+  first check fails (the history was rewritten since), or the second
+  holds and the third does not (a merge since did not merge the base
+  branch and nothing else), or a command gives an error: do *Four
+  angles* for the whole pull request.
 - All three hold: do the section above, also when the latest review
   requested changes, and then check that the merges, or the author's
   replies, answer each finding of the reviews since `<reviewed>`.
