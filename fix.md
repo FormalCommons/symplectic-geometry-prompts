@@ -14,7 +14,10 @@ Find out what is wrong:
 - Reviews and comments: `gh pr view {{.Number}} --comments`, and comments on
   lines of code: `gh api repos/{{.Repo}}/pulls/{{.Number}}/comments`.
 - Failing checks: `gh pr checks {{.Number}}`, then
-  `gh run view <run-id> --log-failed`.
+  `gh run view <run-id> --log-failed`. The checks build the pull request
+  merged with the base branch as it was when they began. If what fails is
+  nothing that the pull request changes, merge the base branch and fix
+  what breaks.
 - A conflict: merge the base branch (`git merge origin/main`, or whichever
   branch the pull request targets) and resolve it.
 - Removed from the merge queue: the queue tested it together with newer
@@ -29,7 +32,33 @@ Find out what is wrong:
   what failed; if the merge brought in nothing new, push nothing.
 - A review says it breaks when merged with the base branch: merge the
   base branch and fix what breaks.
+- The base branch has commits that it lacks: merge the base branch and
+  fix what breaks. Push the merge even if nothing breaks: the checks and
+  the merge queue then test what will merge.
+{{if .First}}
+This pull request merges first. The reviewer has approved a commit of it,
+and since then the workers keep every other pull request out of the merge
+queue until this one has merged: all of them wait for this fix. The next
+review looks only at what changed since the approval. So:
 
+- Merge the base branch first, whatever the reason above, and fix what
+  that breaks.
+- Change nothing that neither the reason above nor the merge calls for.
+- Commit the merge by itself, with its conflicts resolved, and then each
+  repair in a commit of its own, so that the review can read them one by
+  one.
+- Before you push, `git fetch origin` once more, and merge and build
+  again if the base branch has moved: pull requests that were in the
+  merge queue already still merge.
+{{else if .Leads}}
+This pull request will merge first: once the reviewer approves it, the
+workers keep every other pull request out of the merge queue until it has
+merged. Until then the base branch keeps moving, and the checks build
+your push merged with it. So merge the base branch before you fix
+anything else, and fix what that breaks too. Before you push,
+`git fetch origin` once more, and merge and build again if the base branch
+has moved.
+{{end}}
 Read the issue the pull request closes or is part of, so that the fix
 still does what the issue asks. A review's "Notes for later steps:" are
 for later issues, not for this pull request: do not change it for them.

@@ -76,7 +76,42 @@ line for each angle that the review follows the approval of `<reviewed>`
 and a merge of the base branch, and what you checked. On a design, still
 list the notes for later steps, repeated from the approval of
 `<reviewed>`.
+{{if .First}}
+**This pull request merges first.** Since its first approval the workers
+keep every other pull request out of the merge queue until this one has
+merged, and a fix job has merged the base branch into it and repaired what
+the base branch's newer commits broke. All the others wait for this
+review, so it covers what changed since the approval and no more. Take as
+`<reviewed>` the commit of the reviewer's latest review that approved,
+even if a later review of its requested changes. If the first of the three
+checks above holds for it and the second does not (the author has made
+commits of their own since), the paragraph above would send the whole
+pull request to *Four angles*. For this one, do this instead:
 
+- Read the difference, commit by commit
+  (`git log --first-parent --reverse <reviewed>..HEAD`): a merge of the
+  base branch with `git show --remerge-diff <merge>`, and check it as
+  above; any other commit with `git show <commit>`. If one of the merges
+  did not merge the base branch, stop here and do *Four angles* for the
+  whole pull request.
+- If a review since `<reviewed>` requested changes, check that the
+  commits answer each of its findings.
+- If the author's commits change only proofs, imports, and names or
+  notation that the base branch or a dependency changed, and neither add
+  a declaration nor change a statement, a docstring's claim or the
+  design, judge them yourself, with no subagents, by the review protocol
+  and the four angles below as far as they bear on the changed lines.
+- Otherwise do *Four angles* for the difference only: tell each subagent
+  that `<reviewed>` was approved from its angle, give it the commits since
+  and how to read each, and tell it to report only on what they change,
+  reading the rest as context.
+- Check that the build above passed.
+
+Then go on from *The base branch*. If you approve, say for each angle
+that the review follows the approval of `<reviewed>` and covers the
+commits since, and what you checked. On a design, still list the notes
+for later steps, repeated from the approval of `<reviewed>`.
+{{end}}
 ## Four angles
 
 Review the latest commit from the four angles below, each by its own
@@ -112,12 +147,22 @@ nothing, judge its angle yourself: never approve without all four.
 
 ## The base branch
 
+{{if .Leads -}}
+This pull request will merge first, and the reviewer has not approved it
+yet. Once you approve, the workers keep every other pull request out of
+the merge queue until it has merged, and a fix job merges the base branch
+into it and repairs what breaks; you then review that difference. Until
+then the base branch moves faster than a fix could follow. So leave this
+check out: do not merge the base branch, and neither a conflict with it
+nor something that only its newer commits break is a finding.
+{{- else -}}
 Last, check that it still works with the latest base branch, which may have
 moved since the pull request began, or while you reviewed: `git fetch
 origin`, merge the base branch into your checkout (`git merge origin/main`,
 or whichever branch the pull request targets), and build again, with every
 command under *Building*. Do not push the merge. If it conflicts, or the
 merged code fails, that is a finding: request changes and say what breaks.
+{{- end}}
 
 Then decide what to do with each finding and suggestion. Nobody acts on a
 suggestion in an approved review, so:

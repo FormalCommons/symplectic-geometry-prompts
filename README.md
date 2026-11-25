@@ -21,7 +21,11 @@ restart.
 Each prompt is a Go [text/template](https://pkg.go.dev/text/template), with
 the fields that fc-worker's README lists, such as `{{.Repo}}` and
 `{{.Number}}`. A file named `_*.md` is included with
-`{{template "_name.md" .}}`. The prompts started as fc-worker's example
+`{{template "_name.md" .}}`. `review.md` and `fix.md` use `{{.Leads}}`
+and `{{.First}}`, which say that a pull request
+[merges first](https://github.com/FormalCommons/fc-worker#merging-one-pull-request-first);
+an fc-worker without these fields does not take up the prompts and keeps
+the commit it had. The prompts started as fc-worker's example
 prompts at
 [`cc836b4dfea2`](https://github.com/FormalCommons/fc-worker/tree/cc836b4dfea2e20fd4a8ac8ea1a42959bafca3b4/prompts).
 
@@ -46,6 +50,14 @@ fix for a conflict does, the review job does not start the four subagents
 again: it checks how each merge resolved its conflicts and that the merged
 code builds. What the base branch brought in that the pull request could
 now use becomes an issue and not a request for changes.
+
+A pull request that merges first, such as a move to a new version of Tau
+Ceti, holds the others out of the merge queue only from its first
+approval. Before that, its review leaves out the check against the latest
+base branch, which moves faster than a fix could follow, and its fix jobs
+merge the base branch before they push. After the approval a fix job
+merges the base branch once more and repairs what breaks, and the review
+that follows covers only what changed since the approval.
 
 A design, a pull request that changes only the design, is reviewed for what
 later steps could not put right: the milestones, the build order, the
