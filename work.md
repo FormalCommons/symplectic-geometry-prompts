@@ -62,17 +62,21 @@ Then make progress on the issue in one of these ways:
   for what it concerns: for a part that gets a design issue, that design
   issue. Do not open a pull request in this case: #{{.Number}} comes back
   to an agent when its parts are done.
-- **Change other issues.** If the issue asks for blockers of open issues to
-  be added or removed, or for their titles or texts to be brought in line,
-  after a change to the design, make each change it names that the design
-  on `main` calls for, and skip any that it does not. Remove a blocker
-  only where the design shows that the issue no longer builds on it, and
-  keep blockers that a prerequisite, a design issue or a split added. In
-  a title or text (`gh issue edit <number> --title "…" --body-file …`),
-  change what no longer agrees with the design, and keep the rest as it
-  is. Open no pull request: comment with each change you made, and each
-  you skipped and why, with the line of the design behind it, and label
-  the issue `close-proposed`.
+- **Change other issues.** If the issue asks, after a change to the
+  design, for blockers of open issues to be added or removed, or for the
+  titles or texts of open issues to be brought in line with it, make each
+  change it names that the design on `main` calls for, and skip any that
+  it does not. Remove a blocker only where the design shows that the
+  issue no longer builds on it, and keep blockers that a prerequisite, a
+  design issue or a split added. In a title or text, change what no
+  longer agrees with the design, and keep the rest as it is: take the
+  text as it is now (`gh issue view <number> --json body -q .body`) and
+  post it changed (`gh issue edit <number> --title "…" --body-file …`).
+  Leave the title and text of an issue that a person opened
+  (`gh issue view <number> --json author`) as they are, and say in your
+  comment what no longer agrees. Open no pull request: comment with each
+  change you made, and each you skipped and why, with the line of the
+  design behind it, and label the issue `close-proposed`.
 - **Propose closing it.** If the issue needs no change, because it is done
   already, a duplicate or mistaken, comment why and label it
   `close-proposed`. Do not close it yourself. Give the evidence, so that
