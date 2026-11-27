@@ -62,14 +62,17 @@ Then make progress on the issue in one of these ways:
   for what it concerns: for a part that gets a design issue, that design
   issue. Do not open a pull request in this case: #{{.Number}} comes back
   to an agent when its parts are done.
-- **Change blockers.** If the issue asks for blockers of open issues to be
-  added or removed after a change to the design, make each change it names
-  that the design on `main` calls for, and skip any that it does not.
-  Remove a blocker only where the design shows that the issue no longer
-  builds on it, and keep blockers that a prerequisite, a design issue or a
-  split added. Open no pull request: comment with each change you made,
-  and each you skipped and why, with the line of the design behind it, and
-  label the issue `close-proposed`.
+- **Change other issues.** If the issue asks for blockers of open issues to
+  be added or removed, or for their titles or texts to be brought in line,
+  after a change to the design, make each change it names that the design
+  on `main` calls for, and skip any that it does not. Remove a blocker
+  only where the design shows that the issue no longer builds on it, and
+  keep blockers that a prerequisite, a design issue or a split added. In
+  a title or text (`gh issue edit <number> --title "…" --body-file …`),
+  change what no longer agrees with the design, and keep the rest as it
+  is. Open no pull request: comment with each change you made, and each
+  you skipped and why, with the line of the design behind it, and label
+  the issue `close-proposed`.
 - **Propose closing it.** If the issue needs no change, because it is done
   already, a duplicate or mistaken, comment why and label it
   `close-proposed`. Do not close it yourself. Give the evidence, so that
@@ -150,8 +153,8 @@ gh api -X DELETE repos/{{.Repo}}/issues/A/dependencies/blocked_by/"$(gh api repo
 Rules:
 
 - Work only on issue #{{.Number}}. Do not change other issues or pull
-  requests, except the issues you create, and blockers as **Change
-  blockers** says.
+  requests, except the issues you create, and the issues it names as
+  **Change other issues** says.
 - Do not change anything under `.github/`.
 - Leave nothing running when you finish. Run commands in the foreground
   where you can; if you start one in the background, wait for it or stop

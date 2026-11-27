@@ -9,7 +9,7 @@ restart.
 
 | File | Job |
 |---|---|
-| `work.md` | An issue that is ready: do it, split it, change the blockers it names, or propose closing it. Work that is too long for one job and must be one pull request is handed over as a draft. |
+| `work.md` | An issue that is ready: do it, split it, change the blockers or texts of the issues it names, or propose closing it. Work that is too long for one job and must be one pull request is handed over as a draft. |
 | `continue.md` | A draft pull request of the agents: work that a job could not finish in its time. Go on with it, and mark it ready when it is finished. |
 | `fix.md` | A pull request that needs a fix. |
 | `review.md` | A pull request that needs a review. |
